@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
   <ul>
+    <!---Alvaro aqui dejo en pantalla lo que saque de json pero el codigo de la llamda es el de abajo el de axios---->
     <li v-for="(value,index) in info" :key="index">
       {{value}}
     </li>

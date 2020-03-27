@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <Historia msg="Welcome to Your Vue.js App"/>
+    <Historia/>
+  <!--Aqui va el html de la primera vista-->
+
     <router-link to="Estimacion">estimar</router-link>
     <router-view/>
   </div>
