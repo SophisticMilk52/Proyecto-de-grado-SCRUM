@@ -17,7 +17,7 @@ export default {
       info: "Valorcito"
     };
   },
-  name: "HelloWorld",
+  name: "Historia",
   props: {
     msg: String
   },

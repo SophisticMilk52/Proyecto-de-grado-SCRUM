@@ -1,20 +1,20 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Historia msg="Welcome to Your Vue.js App"/>
     <router-link to="Estimacion">estimar</router-link>
     <router-view/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Historia from './components/Historia.vue'
 
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Historia
   }
 }
 </script>
