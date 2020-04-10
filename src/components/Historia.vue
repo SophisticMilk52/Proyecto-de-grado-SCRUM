@@ -1,11 +1,29 @@
 <template>
   <div class="hello">
-  <ul>
+  <!-- <ul> -->
     <!---Alvaro aqui dejo en pantalla lo que saque de json pero el codigo de la llamda es el de abajo el de axios---->
-    <li v-for="(value,index) in info" :key="index">
-      {{value}}
-    </li>
-  </ul>
+    <!-- <li v-for="(value,index) in info" :key="index"> -->
+      <!-- {{value}} -->
+    <!-- </li> -->
+  <!-- </ul> -->
+  <div>
+    <img src="../assets/story-image.jpeg" width="300px"/>
+    <h2>Historia de usuario #1: Aeropuerto</h2>
+  </div>
+  <div>
+    <p>
+      Se espera que se entregue un aeropuerto con las edificaciones y vehiculos necesarios para su operación.
+    </p>
+    <h3>
+      Criterios de Aceptación:
+    </h3>
+    <ul>
+      <li>No debe haber huecos de espacio en el aeropuerto.</li>
+      <li>La pista debe ser lo suficientemente grande para que un avion grande pueda movilizarse dentro de ella, sin trabarse con otras estructuras.</li>
+      <li></li>
+    </ul>
+    <h3><router-link to="/story/estimation">Realizar estimación</router-link></h3>
+  </div>
   </div>
 </template>
 
@@ -49,11 +67,11 @@ h3 {
   margin: 40px 0 0;
 }
 ul {
-  list-style-type: none;
+  list-style-type: none ;
   padding: 0;
 }
 li {
-  display: inline-block;
+  /* display: inline-block; */
   margin: 0 10px;
 }
 a {
