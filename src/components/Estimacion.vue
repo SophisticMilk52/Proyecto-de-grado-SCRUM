@@ -9,27 +9,27 @@
         <!-- Debe hacerse con Bootstrap o similar para que sea reactiva.
         es decir, que cambie con el tamaño. -->
         <tr>
-            <button id="btn" value=1 onclick="cambioValorEstimacion" >1</button>
-            <button id="btn" value=2 onclick>2</button>
-             <button id="btn" value=3 onclick>3</button>
-             <button id="btn" value=5 onclick>5</button>
+            <button id="btn" value=2 @click=change(1)>1</button>
+            <button id="btn" value=2 @click=change(2)>2</button>
+             <button id="btn" value=3 @click=change(3)>3</button>
+             <button id="btn" value=5  @click=change(5)>5</button>
         </tr>
         <tr>
-            <button id="btn" value=8>8</button>
-            <button id="btn" value=13>13</button>
-             <button id="btn" value =21>21</button>
-            <button id="btn" value=34>34</button>
+            <button id="btn" value=8 @click=change(8)>8</button>
+            <button id="btn" value=13 @click=change(13)>13</button>
+             <button id="btn" value =21  @click=change(21)>21</button>
+            <button id="btn" value=34  @click=change(34)>34</button>
         </tr>
         <tr>
-             <button id="btn" value=55>55</button>
-             <button id="btn" value=99>99</button>
-              <button id="btn" value=∞>∞</button>
-           <button id="btn" value=...>...</button>
+             <button id="btn" value=55 @click=change(55)>55</button>
+             <button id="btn" value=99  @click=change(99)>99</button>
+              <button id="btn" value=∞ @click=change(100)>∞</button>
+           <button id="btn" value=... @click=change(101)>...</button>
         </tr>
     </table>
         </div>
     <div class="estimation">
-        <h5 id="h5" value=""> {{valor}}</h5>
+        <h5 id="h5" value=""> {{data}}</h5>
     </div>
     <div>
         ¿Desea guardar esta estimación?
@@ -41,12 +41,30 @@
     </div>
 </template>
 <script>
+
 export default {
-methods: {
-cambioValorEstimacion(btn){
-btn.value
-        }
-    }
+      data() {
+    return {
+        buttons:[1,2,3,5,8,13,21,34,55,99,"∞","..."],
+    data: "",
+    minLen:12
+    };
+  },
+  methods: {
+    change: function(value) {
+ 
+      if(value==100){
+        this.data="∞"
+      this.data.value=sts
+      }else if(value==101){
+          this.data="..."
+      this.data.value=sts 
+      }else{
+    var sts=(value).toString();
+      this.data=sts
+      this.data.value=sts
+    }}
+  }
 }
 
 
