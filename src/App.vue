@@ -11,9 +11,6 @@
       <li>
         <router-link to="/story">Historia</router-link>
       </li>
-      <li>
-        <router-link to="/story/estimation">Estimacion</router-link>
-      </li>
     </ul>
     <router-view/>
   </div>
@@ -36,9 +33,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 0;
 }
 ul{
   list-style-type: none;
+}
+h1{
+  margin: 0;
 }
 </style>
