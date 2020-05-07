@@ -6,14 +6,26 @@
       <!-- {{value}} -->
     <!-- </li> -->
   <!-- </ul> -->
-  <div>
-    <img src="../assets/story-image.jpeg" width="300px"/>
-    <h2>Historia de usuario #1: Aeropuerto</h2>
-  </div>
-  <div>
-    <p>
+  <div >
+    <div class="auxuno">
+       <h2>Historia de usuario #1: Aeropuerto</h2>
+      <br>
+      <br>
+      <br>
+       <h2>Descripcion</h2>
+    <br>
+          <p>
       Se espera que se entregue un aeropuerto con las edificaciones y vehiculos necesarios para su operación.
     </p>
+    </div>
+    <div class="auxdos">
+       <button> <router-link to="/story" >Siguiente Historia</router-link></button>
+    <br>
+      <img src="../assets/story-image.jpeg" width="300px"/></div>
+      <br>
+  </div>
+  <div>
+ 
     <h3>
       Criterios de Aceptación:
     </h3>
@@ -23,6 +35,7 @@
       <li></li>
     </ul>
     <h3><router-link to="/story/estimation">Realizar estimación</router-link></h3>
+   
   </div>
   </div>
 </template>
@@ -63,8 +76,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+h2,p {
+  float: left;
+  margin: 0 0;
 }
 ul {
   list-style-type: none ;
@@ -72,9 +86,17 @@ ul {
 }
 li {
   /* display: inline-block; */
+
   margin: 0 10px;
 }
 a {
   color: #42b983;
+}
+.auxuno{
+  float: left;
+    width: 50%;
+}
+button{
+  float: right;
 }
 </style>

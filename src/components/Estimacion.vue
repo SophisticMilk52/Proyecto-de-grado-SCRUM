@@ -34,7 +34,8 @@
     <div>
         ¿Desea guardar esta estimación?
         <br>
-            <button>Cancelar</button>
+   
+            <button><router-link to="/story" >Cancelar</router-link></button>
              <button>Confirmar</button>
     </div>
 
@@ -72,23 +73,26 @@ export default {
 </script>
 
 <style scoped>
+  .disabledButton {
+    background-color: #d8d8d8;
+  }
     table{
         text-align : center;
         margin-left: auto;
         margin-right: auto;
         font-size: 2em;
     }
-    td{
-        width: 100px;
+   
+   
+    h5{
+        font-size: 5rem;
+        margin: 0;
     }
-    .estimation{
-        font-size: 5em;
-    }
-    .btn{
-        width: 40px;
-        height: 40px;
-        margin: 5px;
-
-
+ 
+   #btn{
+    margin-top: 20px;
+    height: 40px;
+    width: 100px;
+    font-size: 40px;
     }
 </style>
