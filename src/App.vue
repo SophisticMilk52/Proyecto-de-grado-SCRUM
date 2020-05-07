@@ -2,7 +2,7 @@
   <div id="app">
     <Historia/>
   <!--Aqui va el html de la primera vista-->
-    <h1>Practica para aprender Scrum</h1>
+    <h1>Practica para aprender Practicas Agiles</h1>
     
     <ul>
       <li>
