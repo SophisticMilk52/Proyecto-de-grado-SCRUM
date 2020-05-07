@@ -46,6 +46,9 @@
           <td>
             <b-button variant="outline-primary" @click="change(40)">40</b-button>
           </td>
+           <td>
+            <b-button variant="outline-primary" @click="change(99)">99</b-button>
+          </td>
           <td>
             <b-button variant="outline-primary" @click="change(100)">∞</b-button>
           </td>
@@ -62,9 +65,9 @@
       ¿Desea guardar esta estimación?
       <br />
 
-      <button>
-        <router-link to="/story">Cancelar</router-link>
-      </button>
+
+        <router-link to="/story"><button>Cancelar</button></router-link>
+    
       <button>Confirmar</button>
     </div>
   </div>
