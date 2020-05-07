@@ -7,33 +7,51 @@
         <!-- Debe hacerse con Bootstrap o similar para que sea reactiva.
         es decir, que cambie con el tamaño.-->
         <tr>
-          <!-- <button id="btn" value="2" @click="change(1)">1</button>
-          <button id="btn" value="2" @click="change(2)">2</button>
-          <button id="btn" value="3" @click="change(3)">3</button>
-          <button id="btn" value="5" @click="change(5)">5</button> -->
-          <b-button variant="outline-primary" @click="change(1)">1</b-button>
-          <b-button variant="outline-primary" @click="change(2)">2</b-button>
-          <b-button variant="outline-primary" @click="change(3)">3</b-button>
-          <b-button variant="outline-primary" @click="change(5)">5</b-button>
+          <td>
+            <b-button variant="outline-primary" @click="change(1)">1</b-button>
+          </td>
+          <td>
+            <b-button variant="outline-primary" @click="change(2)">2</b-button>
+          </td>
+          <td>
+            <b-button variant="outline-primary" @click="change(3)">3</b-button>
+          </td>
+          <td>
+            <b-button variant="outline-primary" @click="change(5)">5</b-button>
+          </td>
         </tr>
         <tr>
           <!-- <button id="btn" value="8" @click="change(8)">8</button>
           <button id="btn" value="13" @click="change(13)">13</button>
           <button id="btn" value="21" @click="change(21)">21</button>
-          <button id="btn" value="34" @click="change(34)">34</button> -->
-          <b-button variant="outline-primary" @click="change(8)">8</b-button>
-          <b-button variant="outline-primary" @click="change(13)">13</b-button>
-          <b-button variant="outline-primary" @click="change(20)">20</b-button>
-          <b-button variant="outline-primary" @click="change(30)">30</b-button>
+          <button id="btn" value="34" @click="change(34)">34</button>-->
+          <td>
+            <b-button variant="outline-primary" @click="change(8)">8</b-button>
+          </td>
+          <td>
+            <b-button variant="outline-primary" @click="change(13)">13</b-button>
+          </td>
+          <td>
+            <b-button variant="outline-primary" @click="change(20)">20</b-button>
+          </td>
+          <td>
+            <b-button variant="outline-primary" @click="change(30)">30</b-button>
+          </td>
         </tr>
         <tr>
           <!-- <button id="btn" value="55" @click="change(55)">55</button>
           <button id="btn" value="99" @click="change(99)">99</button>
           <button id="btn" value="∞" @click="change(100)">∞</button>
-          <button id="btn" value="..." @click="change(101)">...</button> -->
-          <b-button variant="outline-primary" @click="change(40)">40</b-button>
-          <b-button variant="outline-primary" @click="change(100)">∞</b-button>
-          <b-button variant="outline-primary" @click="change(101)">...</b-button>
+          <button id="btn" value="..." @click="change(101)">...</button>-->
+          <td>
+            <b-button variant="outline-primary" @click="change(40)">40</b-button>
+          </td>
+          <td>
+            <b-button variant="outline-primary" @click="change(100)">∞</b-button>
+          </td>
+          <td>
+            <b-button variant="outline-primary" @click="change(101)">...</b-button>
+          </td>
         </tr>
       </table>
     </div>
