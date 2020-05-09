@@ -104,12 +104,12 @@ export default {
 
 <style scoped>
 .hello{
-  padding-bottom: 4cm;
+  padding-bottom: 2cm;
   background-color:aquamarine;
 
 }
 .hello2{
-  padding-bottom: 4cm;
+  padding-bottom: 2cm;
   background-color:orangered;
   opacity: 0.8;
   border-radius: 5%;

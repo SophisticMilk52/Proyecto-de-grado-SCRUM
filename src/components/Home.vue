@@ -10,10 +10,9 @@
   <br>
   <br>
   <table>
-    <tr><router-link to="/story/stories"><h3>Juego maximus, de a 4 personas por grupo historias complejas </h3></router-link> </tr>
-    <tr><router-link to="/story/stories"><h3>Juego avanzado, 6 personas, practicas y construccion de puentes</h3></router-link></tr>
-    <tr><router-link to="/story/stories"><h3>Juego sencillo parque natural de parejas</h3></router-link> </tr>
-    <tr>    <router-link to="/story/instruccion"><b-button class="button">Instrucciones</b-button></router-link></tr>
+    <tr><router-link to="/juegos/historias"><h3>Juego maximus, de a 4 personas por grupo historias complejas </h3></router-link> </tr>
+    <tr><router-link to="/juegos/historias"><h3>Juego avanzado, 6 personas, practicas y construccion de puentes</h3></router-link></tr>
+    <tr><router-link to="/juegos/historias"><h3>Juego sencillo parque natural de parejas</h3></router-link> </tr>
   </table>
     </div>
   </div>
@@ -83,10 +82,5 @@ h1{
   float: left;
   margin-left: 20px;
 }
-.button{
-float:none;
-padding-right:5cm ;
-padding-left:5cm ;
-margin: 0;
-}
+
 </style>

@@ -12,13 +12,13 @@
     <div class="auxuno">
        <h2 class="numero">Historia de usuario #1: Aeropuerto</h2>
 
-              <router-link to="/story" ><b-button class="siguiente">Siguiente Historia</b-button></router-link>
+              <router-link to="/juegos/historias/historia" ><b-button class="siguiente">Siguiente Historia</b-button></router-link>
        </div>
  <br>
        <h2>Descripcion:</h2>
     
       
-          <p>
+        <p>
       Se espera que se entregue un aeropuerto con las edificaciones y vehiculos necesarios para su operación.
       Hay que tener en cuenta la estructura del diseño y los materiales entregados previamente.
     </p>
@@ -44,7 +44,7 @@
         <br>
         
 
-    <router-link to="/story/estimation"><b-button>Realizar estimación</b-button></router-link>
+    <router-link to="/juegos/historias/historia/estimation"><b-button>Realizar estimación</b-button></router-link>
     </div>
   </div>
     </div>
@@ -99,6 +99,8 @@ p{
 li{
      margin-left: 5cm;
     margin-right: 5cm;
+      font-size: 15px;
+      
     color: black;
 }
 .hello2{
@@ -128,5 +130,9 @@ h1,h2{
   float: left;
   margin-left: 20px;
 }
+p{
+  font-size: 15px;
+  color: black;
 
+}
 </style>

@@ -10,9 +10,10 @@
   <br>
   <br>
   <table>
-    <tr><router-link to="/story"><h3>Historia del aeropuerto</h3></router-link></tr>
-    <tr><router-link to="/story"><h3>Historia de usuario del concierto de rock</h3></router-link></tr>
-    <tr><router-link to="/story"><h3>Historia de mi vida en PDG </h3></router-link></tr>
+    <tr><router-link to="/juegos/historias/historia"><h3>Historia del aeropuerto</h3></router-link></tr>
+    <tr><router-link to="/juegos/historias/historia"><h3>Historia de usuario del concierto de rock</h3></router-link></tr>
+    <tr><router-link to="/juegos/historias/historia"><h3>Historia de mi vida en PDG </h3></router-link></tr>
+  <tr>    <router-link to="/juegos/historias/instruccion"><b-button class="button">Instrucciones</b-button></router-link></tr>
   </table>
   
   </div>
@@ -82,5 +83,10 @@ h1{
   float: left;
   margin-left: 20px;
 }
-
+.button{
+float:none;
+padding-right:5cm ;
+padding-left:5cm ;
+margin: 0;
+}
 </style>

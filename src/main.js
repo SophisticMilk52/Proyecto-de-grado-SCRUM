@@ -11,11 +11,13 @@ import Historia from './components/Historia';
 import Estimacion from './components/Estimacion';
 import VueRouter from 'vue-router';
 import Historias from './components/Historias'
+import Cronometro from './components/Cronometro'
 const routes = [
-  { path: "/", component: Home },
-  { path: "/story", component: Historia },
-  { path: "/story/estimation", component: Estimacion },
-  { path: "/story/stories", component: Historias }
+  { path: "/juegos", component: Home },
+  { path: "/juegos/historias/historia", component: Historia },
+  { path: "/juegos/historias/historia/estimation", component: Estimacion },
+  { path: "/juegos/historias", component: Historias },
+  { path: "/cronometro", component: Cronometro },
 ]
 
 const router = new VueRouter({ routes });

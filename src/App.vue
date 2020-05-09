@@ -3,8 +3,8 @@
     <Historia/>
   <!--Aqui va el html de la primera vista-->
     <h1>Modulo de estimacion</h1>
-        <router-link to="/">Home</router-link>
-   
+        <router-link to="/juegos">Home</router-link>
+    <h3> <router-link to="/cronometro">Cronometro: 00:20:00</router-link></h3>
     <router-view/>
   </div>
 </template>
