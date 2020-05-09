@@ -2,16 +2,9 @@
   <div id="app">
     <Historia/>
   <!--Aqui va el html de la primera vista-->
-    <h1>Practica para aprender Practicas Agiles</h1>
-    
-    <ul>
-      <li>
+    <h1>Modulo de estimacion</h1>
         <router-link to="/">Home</router-link>
-      </li>
-      <li>
-        <router-link to="/story">Historia</router-link>
-      </li>
-    </ul>
+   
     <router-view/>
   </div>
 </template>
@@ -34,6 +27,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 0;
+    background-color: aquamarine;
+
 }
 ul{
   list-style-type: none;

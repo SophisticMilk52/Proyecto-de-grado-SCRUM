@@ -10,11 +10,12 @@ import Home from './components/Home';
 import Historia from './components/Historia';
 import Estimacion from './components/Estimacion';
 import VueRouter from 'vue-router';
-
+import Historias from './components/Historias'
 const routes = [
   { path: "/", component: Home },
   { path: "/story", component: Historia },
-  { path: "/story/estimation", component: Estimacion }
+  { path: "/story/estimation", component: Estimacion },
+  { path: "/story/stories", component: Historias }
 ]
 
 const router = new VueRouter({ routes });

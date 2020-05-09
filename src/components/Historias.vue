@@ -1,21 +1,21 @@
 <template>
   <div class="hello">
-  <div class ="hello2">
+<div class="hello2">
   <br>
   <h1>
-      Juegos
+      Historias
   </h1>
   <br>
   <br>
   <br>
   <br>
   <table>
-    <tr><router-link to="/story/stories"><h3>Juego maximus, de a 4 personas por grupo historias complejas </h3></router-link> </tr>
-    <tr><router-link to="/story/stories"><h3>Juego avanzado, 6 personas, practicas y construccion de puentes</h3></router-link></tr>
-    <tr><router-link to="/story/stories"><h3>Juego sencillo parque natural de parejas</h3></router-link> </tr>
-    <tr>    <router-link to="/story/instruccion"><b-button class="button">Instrucciones</b-button></router-link></tr>
+    <tr><router-link to="/story"><h3>Historia del aeropuerto</h3></router-link></tr>
+    <tr><router-link to="/story"><h3>Historia de usuario del concierto de rock</h3></router-link></tr>
+    <tr><router-link to="/story"><h3>Historia de mi vida en PDG </h3></router-link></tr>
   </table>
-    </div>
+  
+  </div>
   </div>
 </template>
 
@@ -56,7 +56,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .hello{
-  padding-bottom: 3cm;
+  padding-bottom: 4cm;
   background-color:aquamarine;
 
 }
@@ -68,14 +68,13 @@ export default {
   margin-right:100px ;
   margin-left:100px ;
 }
-
 h3{
   float: left;
   color: black;
   margin-left:20px;
 }
 tr{
- 
+  padding-right:10cm;
 }
 h1{
   color: black;
@@ -83,10 +82,5 @@ h1{
   float: left;
   margin-left: 20px;
 }
-.button{
-float:none;
-padding-right:5cm ;
-padding-left:5cm ;
-margin: 0;
-}
+
 </style>
