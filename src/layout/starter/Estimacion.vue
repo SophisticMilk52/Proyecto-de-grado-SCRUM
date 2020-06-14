@@ -67,7 +67,7 @@
  
         <router-link to="/story"><base-button class="animation-on-hover" type="success">Cancelar</base-button></router-link>
     
-      <base-button type="success" class="button" v-bind:disabled="dis">Confirmar</base-button>
+      <base-button type="success" class="button" v-bind:disabled="dis"><router-link to="/grupo">Confirmar</router-link></base-button>
     </div>
     </div>
   </div>

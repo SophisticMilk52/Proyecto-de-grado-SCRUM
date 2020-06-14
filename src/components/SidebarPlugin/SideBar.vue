@@ -46,7 +46,7 @@
     props: {
       title: {
         type: String,
-        default: "Practicas agiles"
+        default: "Agile learning tool"
       },
       backgroundColor: {
         type: String,

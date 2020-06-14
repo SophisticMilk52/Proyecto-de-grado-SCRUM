@@ -7,6 +7,9 @@ import ProcesoSrcum from '../layout/starter/ProcesoSrcum.vue';
 import Historia from '../layout/starter/Historia.vue';
 import Estimacion from '../layout/starter/Estimacion.vue';
 import Cronometro from '../layout/starter/Cronometro.vue';
+import Instructor from '../layout/starter/Instructor.vue';
+import Grupo from '../layout/starter/Grupo.vue';
+import Resultados from '../layout/starter/Resultados.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -49,7 +52,23 @@ export default new Router({
           path: 'cronometro',
           name: 'Estimacion',
           components: { default: Cronometro }
+        },
+        {
+          path: 'instructor',
+          name: 'Instructor',
+          components: { default: Instructor }
+        },
+        {
+          path: 'grupo',
+          name: 'Estimacion',
+          components: { default: Grupo }
+        },
+        {
+          path: 'resultados',
+          name: 'Estimacion',
+          components: { default: Resultados }
         }
+      
       ]
     }
   ]

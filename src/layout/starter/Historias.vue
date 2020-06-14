@@ -9,6 +9,11 @@
               <h3 class="h3-historias">Historia del aeropuerto</h3>
             </router-link>
           </td>
+          <td>
+            <router-link to="/stories">
+               <base-button type="info" @click="notifyTopCenter">Compartir</base-button>
+            </router-link>
+          </td>
         </tr>
         <tr>
           <td>
@@ -16,11 +21,20 @@
               <h3 class="h3-historias">Historia del concierto de rock</h3>
             </router-link>
           </td>
+           <td>
+          <base-button type="info" @click="notifyTopCenter">Compartir</base-button>
+      
+          </td>
         </tr>
         <tr>
           <td>
             <router-link to="/story">
               <h3 class="h3-historias">Historia de banco central</h3>
+            </router-link>
+          </td>
+           <td>
+            <router-link to="/stories">
+                 <base-button type="info" @click="notifyTopCenter">Compartir</base-button>
             </router-link>
           </td>
         </tr>
@@ -35,7 +49,13 @@
 </template>
   
   <script>
-export default {};
+export default {
+    methods: {
+      notifyTopCenter() {
+      this.$notify({verticalAlign: 'top', horizontalAlign: 'center', message: 'Vamos a trabajar en la Historia del rock'});
+    },
+    }
+};
 </script>
   
   <style scoped>

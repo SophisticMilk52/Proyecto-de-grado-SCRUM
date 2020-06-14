@@ -5,37 +5,125 @@
       <table class="table table-striped">
         <tr>
           <th>
-            <h3>Estimacion</h3>
+            <h3 class="text-center">Intervalo 1</h3>
           </th>
           <th>
-            <h3>Construccion</h3>
+            <h3 class="text-center">Intervalo 2</h3>
+          </th>
+          <th>
+            <h3 class="text-center">Intervalo 3</h3>
           </th>
         </tr>
-
         <br />
 
         <tr>
           <td>
-            <h5>00:04:00</h5>
+            <table>
+              <tr>
+                <th>
+                  <h4>Estimacion</h4>
+                </th>
+                <th>
+                  <h4>Construccion</h4>
+                </th>
+              </tr>
+              <tr>
+                <td>
+                  <h5>00:04:00</h5>
+                </td>
+                <td>
+                  <h5>00:02:00</h5>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h5>00:30:00</h5>
+                </td>
+                <td>
+                  <h5>00:22:00</h5>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h5>00:04:00</h5>
+                </td>
+                <td>
+                  <h5>00:12:00</h5>
+                </td>
+              </tr>
+            </table>
           </td>
           <td>
-            <h5>00:02:00</h5>
+            <table>
+              <tr>
+                <th>
+                  <h4>Estimacion</h4>
+                </th>
+                <th>
+                  <h4>Construccion</h4>
+                </th>
+              </tr>
+              <tr>
+                <td>
+                  <h5>00:04:00</h5>
+                </td>
+                <td>
+                  <h5>00:02:00</h5>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h5>00:30:00</h5>
+                </td>
+                <td>
+                  <h5>00:22:00</h5>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h5>00:04:00</h5>
+                </td>
+                <td>
+                  <h5>00:12:00</h5>
+                </td>
+              </tr>
+            </table>
           </td>
-        </tr>
-        <tr>
           <td>
-            <h5>00:30:00</h5>
-          </td>
-          <td>
-            <h5>00:22:00</h5>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <h5>00:04:00</h5>
-          </td>
-          <td>
-            <h5>00:12:00</h5>
+            <table>
+              <tr>
+                <th>
+                  <h4>Estimacion</h4>
+                </th>
+                <th>
+                  <h4>Construccion</h4>
+                </th>
+              </tr>
+              <tr>
+                <td>
+                  <h5>00:04:00</h5>
+                </td>
+                <td>
+                  <h5>00:02:00</h5>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h5>00:30:00</h5>
+                </td>
+                <td>
+                  <h5>00:22:00</h5>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h5>00:04:00</h5>
+                </td>
+                <td>
+                  <h5>00:12:00</h5>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
       </table>
