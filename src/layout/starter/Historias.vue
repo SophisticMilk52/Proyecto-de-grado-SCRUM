@@ -3,38 +3,15 @@
     <h1 class="text-center">Historias</h1>
     <div class="elementos">
       <table class="table">
-        <tr>
+        <tr :key="story.id" v-for="story in stories">
           <td>
-            <router-link to="/story">
-              <h3 class="h3-historias">Historia del aeropuerto</h3>
+            <router-link :to="'/juegos/'+idJuego+'/stories/'+story.id">
+              <h3 class="h3-historias">{{story.shortDescription}}</h3>
             </router-link>
           </td>
           <td>
             <router-link to="/stories">
-               <base-button type="info" @click="notifyTopCenter">Compartir</base-button>
-            </router-link>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <router-link to="/story">
-              <h3 class="h3-historias">Historia del concierto de rock</h3>
-            </router-link>
-          </td>
-           <td>
-          <base-button type="info" @click="notifyTopCenter">Compartir</base-button>
-      
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <router-link to="/story">
-              <h3 class="h3-historias">Historia de banco central</h3>
-            </router-link>
-          </td>
-           <td>
-            <router-link to="/stories">
-                 <base-button type="info" @click="notifyTopCenter">Compartir</base-button>
+              <base-button type="info" @click="notifyTopCenter">Compartir</base-button>
             </router-link>
           </td>
         </tr>
@@ -49,12 +26,30 @@
 </template>
   
   <script>
+import axios from "../../plugins/axios";
 export default {
-    methods: {
-      notifyTopCenter() {
-      this.$notify({verticalAlign: 'top', horizontalAlign: 'center', message: 'Vamos a trabajar en la Historia del rock'});
-    },
+  data() {
+    return {
+      idJuego: this.$route.params.id,
+      idHistoria: this.$route.params.id2,
+      stories: []
+    };
+  },
+  methods: {
+    notifyTopCenter() {
+      this.$notify({
+        verticalAlign: "top",
+        horizontalAlign: "center",
+        message: "Vamos a trabajar en la Historia del rock"
+      });
     }
+  },
+  created() {
+    axios.get("/games/" + this.idJuego + "/stories/").then(res => {
+      console.log(this.idJuego + "hay algo?");
+      this.stories = res.data;
+    });
+  }
 };
 </script>
   

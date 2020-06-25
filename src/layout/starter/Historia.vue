@@ -8,39 +8,60 @@
     <!-- </ul> -->
     <br />
 
-    <h2 class="text-center">Historia de usuario #1: Aeropuerto</h2>
+    <h2 class="text-center" :key="hist.id" v-for="hist in historia">Historia de usuario:{{this.name}}</h2>
 
     <div class="elementos">
       <br />
       <h2>Descripcion:</h2>
-      <p>
-        Se espera que se entregue un aeropuerto con las edificaciones y vehiculos necesarios para su operación.
-        Hay que tener en cuenta la estructura del diseño y los materiales entregados previamente.
-      </p>
+      <p>{{this.descripcion}}</p>
       <br />
 
       <h2>Criterios de Aceptación:</h2>
       <ul>
-        <li>No debe haber huecos de espacio en el aeropuerto.</li>
-        <li>La pista debe ser lo suficientemente grande para que un avion grande pueda movilizarse dentro de ella, sin trabarse con otras estructuras.</li>
+        <li :key="hist.id" v-for="hist in historia">{{hist.description}}</li>
       </ul>
-      <br>
+      <br />
     </div>
     <br />
     <div class="text-center">
-    <router-link to="/story">
-      <base-button type="success">Siguiente Historia</base-button>
-    </router-link>
+      <router-link to="/story">
+        <base-button type="success">Siguiente Historia</base-button>
+      </router-link>
 
-    <router-link to="/estimation">
-      <base-button type="success">Realizar estimacion</base-button>
-    </router-link>
+      <router-link to="/estimation">
+        <base-button type="success">Realizar estimacion</base-button>
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import axios from "../../plugins/axios";
+export default {
+  name: "starter-page",
+  data() {
+    return {
+      historia: [],
+      idJuego: this.$route.params.id,
+      idHistoria: this.$route.params.id2,
+      nombre: this.$props.name,
+      descripcion: this.$props.descripcion
+    };
+  },
+  created() {
+    axios
+      .get(
+        "/games/" +
+          this.idJuego +
+          "/stories/" +
+          this.idHistoria +
+          "/accriteria/"
+      )
+      .then(res => {
+        this.historia = res.data;
+      });
+  }
+};
 </script>
 
 <style>
@@ -48,7 +69,8 @@ export default {};
   background-color: white;
   border-radius: 25px;
 }
-h2,p{
-  margin-left:20px;
+h2,
+p {
+  margin-left: 20px;
 }
 </style>
