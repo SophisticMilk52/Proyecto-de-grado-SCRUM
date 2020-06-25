@@ -28,9 +28,9 @@
     </div>
     <br />
     <div class="text-center">
-    <router-link to="/story">
+    <!-- <router-link to="/story">
       <base-button type="success">Siguiente Historia</base-button>
-    </router-link>
+    </router-link> -->
 
     <router-link to="/estimation">
       <base-button type="success">Realizar estimacion</base-button>
@@ -40,7 +40,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  
+};
 </script>
 
 <style>

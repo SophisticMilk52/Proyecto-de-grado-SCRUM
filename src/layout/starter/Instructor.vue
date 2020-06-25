@@ -54,7 +54,6 @@
 <script>
 export default {};
 </script>
-</script>
 <style scoped>
 .elementos {
   background-color: white;
