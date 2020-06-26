@@ -132,7 +132,20 @@
 </template>
 
 <script>
-export default {};
+export default {
+
+  data() {
+    return {
+      intervalos:[]
+    };
+  },
+  created() {
+    axios.get("/games/"+this.idJuego+"/stories/").then(res => {
+      console.log(this.idJuego+"hay algo?")
+      this.stories = res.data;
+    });
+  }
+};
 </script>
 
 <style scoped>

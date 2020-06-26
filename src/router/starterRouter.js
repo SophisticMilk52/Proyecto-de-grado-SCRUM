@@ -32,13 +32,13 @@ export default new Router({
         }
         ,
         {
-          path: 'stories',
+          path: 'juegos/:id',
           name: 'Estimacion',
           components: { default: Historias }
         }
         ,
         {
-          path: 'story',
+          path: 'juegos/:id/stories/:id2',
           name: 'Estimacion',
           components: { default: Historia }
         }
@@ -49,7 +49,7 @@ export default new Router({
           components: { default: Estimacion }
         },
         {
-          path: 'cronometro',
+          path: 'cronometro/:id',
           name: 'Estimacion',
           components: { default: Cronometro }
         },
@@ -68,7 +68,7 @@ export default new Router({
           name: 'Estimacion',
           components: { default: Resultados }
         }
-      
+
       ]
     }
   ]
