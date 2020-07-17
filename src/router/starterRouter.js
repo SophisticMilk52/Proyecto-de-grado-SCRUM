@@ -10,6 +10,8 @@ import Cronometro from '../layout/starter/Cronometro.vue';
 import Instructor from '../layout/starter/Instructor.vue';
 import Grupo from '../layout/starter/Grupo.vue';
 import Resultados from '../layout/starter/Resultados.vue';
+import LinkGenerator from '../layout/starter/LinkGenerator.vue';
+import LoginGuest from '../layout/starter/LoginGuest.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -38,13 +40,25 @@ export default new Router({
         }
         ,
         {
+          path: 'juegos/:id/links',
+          name: 'Generar Enlaces',
+          components: { default: LinkGenerator }
+        }
+        ,
+        {
           path: 'juegos/:id/stories/:id2',
           name: 'Estimacion',
           components: { default: Historia }
         }
         ,
         {
-          path: 'estimation',
+          path: 'juegos/:gameId/group/:groupId/login/:pass',
+          name: 'Estimacion',
+          components: { default: LoginGuest }
+        }
+        ,
+        {
+          path: 'juegos/:gameId/stories/:storyId/estimation',
           name: 'Estimacion',
           components: { default: Estimacion }
         },

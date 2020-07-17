@@ -2,7 +2,6 @@
   <div class="wrapper">
     <side-bar>
       <template slot="links">
-        <sidebar-link to="/instructor" :name="$t('Instructor')" icon="tim-icons icon-atom" />
         <sidebar-link to="/juegos" :name="$t('Estimacion')" icon="tim-icons icon-molecule-40" />
         <sidebar-link to="/proceso" :name="$t('Proceso Scrum')" icon="tim-icons icon-chart-pie-36" />
       </template>

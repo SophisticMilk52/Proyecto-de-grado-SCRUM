@@ -2,7 +2,8 @@
   <div class="hello">
     <h1 class="text-center">Cronometro</h1>
     <div class="elementos">
-      <table class="table table-striped">
+      {{ this.intervalos }}
+      <!-- <table class="table table-striped">
         <tr>
           <th>
             <h3 class="text-center">Intervalo 1</h3>
@@ -126,12 +127,13 @@
             </table>
           </td>
         </tr>
-      </table>
+      </table> -->
     </div>
   </div>
 </template>
 
 <script>
+import axios from "../../plugins/axios";
 export default {
 
   data() {
@@ -140,10 +142,15 @@ export default {
     };
   },
   created() {
-    axios.get("/games/"+this.idJuego+"/stories/").then(res => {
-      console.log(this.idJuego+"hay algo?")
-      this.stories = res.data;
-    });
+    // Get TimeControls(cronometros)
+    axios.get("/games/"+this.$route.params.id+"/timecontrols/").then(
+      res => {
+        console.log(res.data)
+        this.intervalos = res.data
+      }
+    )
+
+    // Get TimeIntervals
   }
 };
 </script>

@@ -7,71 +7,88 @@
     <!-- </li> -->
     <!-- </ul> -->
     <br />
-
-    <h2 class="text-center" :key="hist.id" v-for="hist in historia">Historia de usuario:{{this.name}}</h2>
+    <h2 class="text-center">Historia de usuario: {{this.story.shortDescription}}</h2>
 
     <div class="elementos">
       <br />
       <h2>Descripcion:</h2>
-      <p>{{this.descripcion}}</p>
+      <p>{{this.story.description}}</p>
       <br />
 
       <h2>Criterios de Aceptación:</h2>
       <ul>
-        <li :key="hist.id" v-for="hist in historia">{{hist.description}}</li>
+        <li :key="c.id" v-for="c in criteria">{{c.description}}</li>
       </ul>
       <br />
     </div>
     <br />
     <div class="text-center">
-<<<<<<< HEAD
-    <!-- <router-link to="/story">
-      <base-button type="success">Siguiente Historia</base-button>
-    </router-link> -->
-=======
-      <router-link to="/story">
-        <base-button type="success">Siguiente Historia</base-button>
-      </router-link>
->>>>>>> 09d18d13114f16ea13da1fce0ac686eea9135369
-
       <router-link to="/estimation">
-        <base-button type="success">Realizar estimacion</base-button>
+        <base-button type="success" class="confirmation" v-on:click="estimate">Realizar estimacion</base-button>
       </router-link>
     </div>
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD
-export default {
-  
-=======
+var elems = document.getElementsByClassName('confirmation');
+    var confirmIt = function (e) {
+        if (!confirm('Are you sure?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+
+
+
+
 import axios from "../../plugins/axios";
 export default {
   name: "starter-page",
   data() {
     return {
-      historia: [],
-      idJuego: this.$route.params.id,
-      idHistoria: this.$route.params.id2,
-      nombre: this.$props.name,
-      descripcion: this.$props.descripcion
+      // historia: null,
+      // idJuego: this.$route.params.id,
+      // idHistoria: this.$route.params.id2,
+      // nombre: this.$props.name,
+      // descripcion: this.$props.descripcion
+      story: {},
+      criteria: []
     };
   },
   created() {
-    axios
-      .get(
-        "/games/" +
-          this.idJuego +
-          "/stories/" +
-          this.idHistoria +
-          "/accriteria/"
-      )
-      .then(res => {
-        this.historia = res.data;
-      });
+    let route = "/games/"+this.$route.params.id+"/stories/"+this.$route.params.id2
+    axios.get("/games/"+this.$route.params.id+"/stories/"+this.$route.params.id2)
+    .then(res => {
+      this.story = res.data;
+    })
+    axios.get(route+"/accriteria/")
+    .then(res => {
+      console.log(res.data)
+      this.criteria = res.data;
+      console.log(this.criteria)
+    })
+    
+    
+    // axios
+    //   .get(
+    //     "/games/" +
+    //       this.idJuego +
+    //       "/stories/" +
+    //       this.idHistoria +
+    //       "/accriteria/"
+    //   )
+    //   .then(res => {
+    //     this.historia = res.data;
+    //   });
+  },
+  methods: {
+    estimate(e){
+      if(!confirm('Al empezar a estimar, todos los participantes seran redirigidos a la pagina de estimación. ¿Desea continuar?'))
+        e.preventDefault();
+      
+    }
   }
->>>>>>> 09d18d13114f16ea13da1fce0ac686eea9135369
 };
 </script>
 
