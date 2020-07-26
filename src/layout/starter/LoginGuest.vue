@@ -32,9 +32,10 @@
               <base-input
                 label="Nombre"
                 type="text"
+                v-model="newUser"
                 placeholder="Ingrese el nombre con el que desea ser reconocido"
               ></base-input>
-              <base-button native-type="submit" type="primary">Ingresar</base-button>
+              <base-button native-type="submit" @click="newLogin"  type="primary">Ingresar</base-button>
             </form>
           </div>
         </div>
@@ -135,7 +136,7 @@ export default {
   },
   methods: {
     newLogin(event) {
-      
+      console.log(this.newUser)
     },
     existingLogin(event) {}
   }

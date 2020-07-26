@@ -5,7 +5,7 @@ let remot = "http://pi2sis.icesi.edu.co/scrum/api/"
 
 
 	export default axios.create({
-		baseURL: remot,
+		baseURL: local,
 		headers: {
 			'Accept': 'application/json'
 		}

@@ -86,7 +86,7 @@ export default {
     estimate(e){
       if(!confirm('Al empezar a estimar, todos los participantes seran redirigidos a la pagina de estimación. ¿Desea continuar?'))
         e.preventDefault();
-      
+      console.log("Send request to everyone to estimate this story.")
     }
   }
 };
