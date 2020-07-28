@@ -9,6 +9,11 @@
               <h3 class="h3-juegos">{{juego.name}}</h3>
             </router-link>
           </td>
+            <td>
+              <router-link :to="'/juegos/'+juego.id+'/links/'">
+              <base-button class="btn" type="info">links</base-button>
+            </router-link>
+          </td>
           <td>
               <router-link :to="'/cronometro/'+juego.id">
               <base-button class="btn" type="info">Cronometro</base-button>

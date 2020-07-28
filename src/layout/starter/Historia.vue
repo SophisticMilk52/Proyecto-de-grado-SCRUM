@@ -23,7 +23,7 @@
     </div>
     <br />
     <div class="text-center">
-      <router-link to="/estimation">
+      <router-link :to="'/juegos/'+idJuego+'/stories/'+story.id+'/estimation'">
         <base-button type="success" class="confirmation" v-on:click="estimate">Realizar estimacion</base-button>
       </router-link>
     </div>
@@ -48,8 +48,8 @@ export default {
   data() {
     return {
       // historia: null,
-      // idJuego: this.$route.params.id,
-      // idHistoria: this.$route.params.id2,
+      idJuego: this.$route.params.id,
+      idHistoria: this.$route.params.id2,
       // nombre: this.$props.name,
       // descripcion: this.$props.descripcion
       story: {},

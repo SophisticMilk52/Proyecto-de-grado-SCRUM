@@ -16,17 +16,13 @@
               <base-button class="animation-on-hover" type="info" @click="change(2)">2</base-button>
             </td>
             <td class="td-pass">
-              <base-button class="animation-on-hover" type="info" @click="change(3)">4</base-button>
+              <base-button class="animation-on-hover" type="info" @click="change(3)">3</base-button>
             </td>
             <td class="td-pass">
               <base-button class="animation-on-hover" type="info" @click="change(5)">5</base-button>
             </td>
           </tr>
           <tr>
-            <!-- <button id="btn" value="8" @click="change(8)">8</button>
-          <button id="btn" value="13" @click="change(13)">13</button>
-          <button id="btn" value="21" @click="change(21)">21</button>
-            <button id="btn" value="34" @click="change(34)">34</button>-->
             <td class="td-pass">
               <base-button class="animation-on-hover" type="info" @click="change(8)">8</base-button>
             </td>
@@ -34,28 +30,24 @@
               <base-button class="animation-on-hover" type="info" @click="change(13)">13</base-button>
             </td>
             <td class="td-pass">
-              <base-button class="animation-on-hover" type="info" @click="change(20)">20</base-button>
+              <base-button class="animation-on-hover" type="info" @click="change(21)">21</base-button>
             </td>
             <td class="td-pass">
-              <base-button class="animation-on-hover" type="info" @click="change(30)">30</base-button>
+              <base-button class="animation-on-hover" type="info" @click="change(34)">34</base-button>
             </td>
           </tr>
           <tr>
-            <!-- <button id="btn" value="55" @click="change(55)">55</button>
-          <button id="btn" value="99" @click="change(99)">99</button>
-          <button id="btn" value="∞" @click="change(100)">∞</button>
-            <button id="btn" value="..." @click="change(101)">...</button>-->
             <td class="td-pass">
-              <base-button class="animation-on-hover" type="info" @click="change(40)">40</base-button>
+              <base-button class="animation-on-hover" type="info" @click="change(55)">55</base-button>
             </td>
             <td class="td-pass">
-              <base-button class="animation-on-hover" type="info" @click="change(99)">99</base-button>
+              <base-button class="animation-on-hover" type="info" @click="change(89)">89</base-button>
             </td>
             <td class="td-pass">
-              <base-button class="animation-on-hover" type="info" @click="change(100)">∞</base-button>
+              <base-button class="animation-on-hover" type="info" @click="change(144)">144</base-button>
             </td>
             <td class="td-pass">
-              <base-button class="animation-on-hover" type="info" @click="change(101)">...</base-button>
+              <base-button class="animation-on-hover" type="info" @click="change(233)">233</base-button>
             </td>
           </tr>
         </table>
@@ -131,7 +123,7 @@ export default {
   },
   data() {
     return {
-      buttons: [1, 2, 3, 5, 8, 13, 21, 34, 55, 99, "∞", "..."],
+      buttons: [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233],
       data: "",
       minLen: 12,
       dis: true,
@@ -142,17 +134,11 @@ export default {
   methods: {
     change: function(value) {
       var button = document.getElementsByClassName("Button");
-      if (value == 100) {
-        this.data = "∞";
-        this.dis = false;
-      } else if (value == 101) {
-        this.data = "...";
-        this.dis = false;
-      } else {
+      
         var sts = value.toString();
         this.data = sts;
         this.dis = false;
-      }
+      
     }
   }
 };
