@@ -22,17 +22,24 @@
       <a class="dropdown-item" href="#">Mediana Resolucion</a>
       <a class="dropdown-item" href="#">Alta Resolucion</a>
     </base-dropdown>
+    <button id="send" class="btn btn-default" type="submit" @click.prevent="send">Send</button>
   </div>
 </template>
-  
+
   <script>
 import axios from "../../plugins/axios";
+import SockJS from "sockjs-client";
+import Stomp from "webstomp-client";
 export default {
   data() {
     return {
       idJuego: this.$route.params.id,
       idHistoria: this.$route.params.id2,
-      stories: []
+      stories: [],
+
+      received_messages: [],
+      send_message: "Alvaro",
+      connected: false,
     };
   },
   methods: {
@@ -42,17 +49,56 @@ export default {
         horizontalAlign: "center",
         message: "Vamos a trabajar en la Historia del rock"
       });
-    }
+    },
+    send() {
+      console.log("Send message:" + this.send_message);
+      if (this.stompClient && this.stompClient.connected) {
+        const msg = { name: this.send_message };
+        this.stompClient.send("/app/hello", JSON.stringify(msg), {});
+      }
+    },
+    connect() {
+      this.socket = new SockJS("http://localhost:8090/agile-websocket");
+      this.stompClient = Stomp.over(this.socket);
+      this.stompClient.connect(
+        {},
+        (frame) => {
+          this.connected = true;
+          console.log(frame);
+          this.stompClient.subscribe("/topic/greetings", (tick) => {
+            console.log(tick);
+            this.received_messages.push(JSON.parse(tick.body).content);
+            confirm("I am printing " + JSON.parse(tick.body).content);
+          });
+        },
+        (error) => {
+          console.log(error);
+          this.connected = false;
+        }
+      );
+    },
+    disconnect() {
+      if (this.stompClient) {
+        this.stompClient.disconnect();
+      }
+      this.connected = false;
+    },
+    tickleConnection() {
+      this.connected ? this.disconnect() : this.connect();
+    },
+
   },
   created() {
     axios.get("/games/" + this.idJuego + "/stories/").then(res => {
       console.log(this.idJuego + "hay algo?");
       this.stories = res.data;
     });
+    this.connect();
+    console.log("Apparently I am now connected!")
   }
 };
 </script>
-  
+
   <style scoped>
 .elementos {
   background-color: white;

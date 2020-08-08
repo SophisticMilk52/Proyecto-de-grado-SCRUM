@@ -35,7 +35,7 @@
                 v-model="newUser"
                 placeholder="Ingrese el nombre con el que desea ser reconocido"
               ></base-input>
-              <base-button native-type="submit" @click="newLogin"  type="primary">Ingresar</base-button>
+              <base-button native-type="submit" @click="newLogin" type="primary">Ingresar</base-button>
             </form>
           </div>
         </div>
@@ -57,10 +57,16 @@
               <h3>Reingrese al grupo</h3>
               <base-input
                 label="Nombre"
-                type="text"  v-model="newUser"
+                type="text"
+                v-model="newUser"
                 placeholder="Ingrese el nombre con el que desea ser reconocido"
               ></base-input>
-              <base-input label="Password" type="password" placeholder="Password" v-model="password"></base-input>
+              <base-input
+                label="Password"
+                type="password"
+                placeholder="Password"
+                v-model="password"
+              ></base-input>
               <base-button native-type="submit" @click="existingLogin" type="primary">Submit</base-button>
             </form>
           </div>
@@ -91,7 +97,7 @@
       <base-input label="Password" type="password" placeholder="Password"></base-input>
       <base-checkbox>Option one is this</base-checkbox>
       <base-button native-type="submit" type="primary">Submit</base-button>
-    </form> -->
+    </form>-->
 
     <div>
       <!-- {{ this.groups }}
@@ -112,7 +118,7 @@ export default {
     return {
       groups: {},
       newUser: "",
-      password:""
+      password: "",
     };
   },
   created() {
@@ -129,49 +135,55 @@ export default {
           "/groups/" +
           this.$route.params.groupId
       )
-      .then(res => {
+      .then((res) => {
         console.log(res.data);
         this.groups = res.data;
       });
   },
   methods: {
     newLogin(event) {
-      console.log(this.newUser)
-      let parametros={
-       name:this.newUser
-     }
-   axios
-     .post(
-      "/games/" +
-      this.$route.params.gameId +
-    "/groups/" +
-     this.$route.params.groupId+"/participants/",parametros
-   )
-   .then(res => {
-     console.log(res.data);
-     this.groups= res.data;
-     confirm(`su contraseña es: `+ this.groups.password )
-   });
+      console.log(this.newUser);
+      let parametros = {
+        name: this.newUser,
+      };
+      axios
+        .post(
+          "/games/" +
+            this.$route.params.gameId +
+            "/groups/" +
+            this.$route.params.groupId +
+            "/participants/",
+          parametros
+        )
+        .then((res) => {
+          console.log(res.data);
+          this.groups = res.data;
+          confirm(`su contraseña es: ` + this.groups.password);
+          this.$store.commit("login", this.groups);
+        });
     },
     existingLogin(event) {
-        let parametros={
-       name:this.newUser,
-       pass:this.password
-     }
-   axios
-     .post(
-      "/games/" +
-      this.$route.params.gameId +
-    "/groups/" +
-     this.$route.params.groupId+"/participants/login/",parametros
-   )
-   .then(res => {
-     console.log(res.data);
-     this.groups= res.data;
-  
-   });
-    }
-  }
+      let parametros = {
+        name: this.newUser,
+        password: this.password,
+      };
+      axios
+        .post(
+          "/games/" +
+            this.$route.params.gameId +
+            "/groups/" +
+            this.$route.params.groupId +
+            "/participants/login/",
+          parametros
+        )
+        .then((res) => {
+          console.log(res.data);
+          this.groups = res.data;
+          this.$store.commit("login", this.groups);
+          this.$store.getters.currentParticipant;
+        });
+    },
+  },
 };
 </script>
 

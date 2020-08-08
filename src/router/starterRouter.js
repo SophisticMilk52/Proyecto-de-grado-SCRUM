@@ -12,6 +12,7 @@ import Grupo from '../layout/starter/Grupo.vue';
 import Resultados from '../layout/starter/Resultados.vue';
 import LinkGenerator from '../layout/starter/LinkGenerator.vue';
 import LoginGuest from '../layout/starter/LoginGuest.vue';
+import Message from '../layout/starter/Message.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -81,7 +82,13 @@ export default new Router({
           path: 'resultados',
           name: 'Estimacion',
           components: { default: Resultados }
+        },
+        {
+          path: 'msg',
+          name: 'Messaging',
+          components: { default: Message }
         }
+
 
       ]
     }

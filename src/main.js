@@ -21,6 +21,9 @@ import './plugins/axios'
 import BlackDashboard from "./plugins/blackDashboard";
 import i18n from "./i18n"
 import './registerServiceWorker'
+
+import store from './plugins/store'
+
 Vue.use(BlackDashboard);
 Vue.use(VueRouter);
 Vue.use(RouterPrefetch);
@@ -28,6 +31,7 @@ Vue.use(RouterPrefetch);
 /* eslint-disable no-new */
 new Vue({
   router,
+  store,
   i18n,
   render: h => h(App)
 }).$mount("#app");
