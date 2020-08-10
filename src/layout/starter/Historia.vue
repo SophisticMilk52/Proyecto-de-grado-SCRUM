@@ -69,18 +69,6 @@ export default {
       console.log(this.criteria)
     })
     
-    
-    // axios
-    //   .get(
-    //     "/games/" +
-    //       this.idJuego +
-    //       "/stories/" +
-    //       this.idHistoria +
-    //       "/accriteria/"
-    //   )
-    //   .then(res => {
-    //     this.historia = res.data;
-    //   });
   },
   methods: {
     estimate(e){

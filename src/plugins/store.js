@@ -15,7 +15,7 @@ export default new Vuex.Store({
     login(state, payload) {
       state.currentUser.id = payload.id;
       state.currentUser.name = payload.name;
-      state.currentUser.tsscGroup = payload.tssGroup;
+      state.currentUser.tsscGroup = payload.tsscGroup;
     },
     logout(state){
       state.currentUser.id = "";
