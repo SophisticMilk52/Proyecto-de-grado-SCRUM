@@ -19,13 +19,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
       redirect: '/juegos',
       component: DashboardLayout,
       children: [
         {
           path: 'juegos',
-          name: 'Estimacion',
+          name: 'Juegos',
           components: { default: Starter }
         },
         {
@@ -36,25 +36,25 @@ export default new Router({
         ,
         {
           path: 'juegos/:id',
-          name: 'Estimacion',
+          name: 'Historias',
           components: { default: Historias }
         }
         ,
         {
           path: 'juegos/:id/links',
-          name: 'Generar Enlaces',
+          name: 'Enlaces',
           components: { default: LinkGenerator }
         }
         ,
         {
           path: 'juegos/:id/stories/:id2',
-          name: 'Estimacion',
+          name: 'Historia',
           components: { default: Historia }
         }
         ,
         {
           path: 'juegos/:gameId/group/:groupId/login/:pass',
-          name: 'Estimacion',
+          name: 'Ingreso Participante',
           components: { default: LoginGuest }
         }
         ,
@@ -65,7 +65,7 @@ export default new Router({
         },
         {
           path: 'cronometro/:id',
-          name: 'Estimacion',
+          name: 'Cronometro',
           components: { default: Cronometro }
         },
         {
@@ -75,12 +75,12 @@ export default new Router({
         },
         {
           path: 'grupo',
-          name: 'Estimacion',
+          name: 'Grupo',
           components: { default: Grupo }
         },
         {
           path: 'resultados',
-          name: 'Estimacion',
+          name: 'Resultados',
           components: { default: Resultados }
         },
         {

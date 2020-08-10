@@ -160,6 +160,7 @@ export default {
           this.groups = res.data;
           confirm(`su contraseña es: ` + this.groups.password);
           this.$store.commit("login", this.groups);
+          this.$router.push({name: 'Historias', params: {id: this.$route.params.gameId}})
         });
     },
     existingLogin(event) {
@@ -180,7 +181,9 @@ export default {
           console.log(res.data);
           this.groups = res.data;
           this.$store.commit("login", this.groups);
-          this.$store.getters.currentParticipant;
+          // this.$store.getters.currentParticipant;
+          this.$router.push({name: 'Historias', params: {id: this.$route.params.gameId}})
+          console.log("If I print this, wtf.")
         });
     },
   },

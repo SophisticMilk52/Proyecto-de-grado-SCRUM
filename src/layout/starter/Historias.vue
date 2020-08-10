@@ -51,6 +51,7 @@ export default {
       });
     },
     send() {
+
       console.log("Send message:" + this.send_message);
       if (this.stompClient && this.stompClient.connected) {
         const msg = { name: this.send_message };
@@ -89,12 +90,16 @@ export default {
 
   },
   created() {
+    this.$store.getters.currentParticipant
     axios.get("/games/" + this.idJuego + "/stories/").then(res => {
       console.log(this.idJuego + "hay algo?");
       this.stories = res.data;
     });
     this.connect();
     console.log("Apparently I am now connected!")
+  },
+  beforeDestroy() {
+    this.disconnect();
   }
 };
 </script>
