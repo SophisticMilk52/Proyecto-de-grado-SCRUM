@@ -1,75 +1,61 @@
 <template>
   <div>
-    <h2>Seleccione que desea hacer</h2>
+    <h2>Ingreso al Juego de Estimación</h2>
     <div>
-      <!-- <base-button type="primary" @click="modals.modal0 = true">Launch demo modal</base-button> -->
-      <!-- <modal :show.sync="modals.modal0">
-        <template slot="header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        </template>
-        <div>...</div>
-        <template slot="footer">
-          <base-button type="secondary" @click="modals.modal0 = false">Close</base-button>
-          <base-button type="primary">Save changes</base-button>
-        </template>
-      </modal>-->
+      <div>
+        <button
+          v-if="newParticipant"
+          type="button"
+          class="btn btn-info btn-lg"
+          @click="newParticipant = !newParticipant"
+        >
+          Reingresar al Juego
+        </button>
+        <button
+          v-else
+          type="button"
+          class="btn btn-info btn-lg"
+          @click="newParticipant = !newParticipant"
+        >
+          Registrarse en el Juego
+        </button>
 
-      <!-- Trigger the modal with a button -->
-      <button
-        type="button"
-        class="btn btn-info btn-lg"
-        data-toggle="modal"
-        data-target="#myModal"
-      >Inscribirse al grupo</button>
-
-      <!-- Modal -->
-      <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <form @submit.prevent class="modal-body">
-              <h3>Ingrese por primera vez</h3>
+        <div class="form-content" v-if="newParticipant">
+          <form @submit.prevent class="modal-body">
+            <h3>Registro de Participante</h3>
+            <div class="row">
               <base-input
+                class="col"
                 label="Nombre"
                 type="text"
-                v-model="newUser"
-                placeholder="Ingrese el nombre con el que desea ser reconocido"
+                v-model="user"
+                placeholder="Ingrese el nombre con el que desea ser reconocido."
               ></base-input>
-              <base-button native-type="submit" @click="newLogin" type="primary">Ingresar</base-button>
-            </form>
-          </div>
+            </div>
+            <base-button native-type="submit" @click="newLogin" type="primary">Ingresar</base-button>
+          </form>
         </div>
-      </div>
-      <!-- Trigger the modal with a button -->
-      <button
-        type="button"
-        class="btn btn-info btn-lg"
-        data-toggle="modal"
-        data-target="#myModal2"
-      >Volver a ingresar al grupo</button>
-
-      <!-- Modal -->
-      <div id="myModal2" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <form @submit.prevent class="modal-body">
-              <h3>Reingrese al grupo</h3>
+        <div class="form-content" v-else>
+          <form @submit.prevent class="modal-body">
+            <h3>Reingreso de Participante</h3>
+            <div class="row">
               <base-input
+                class="col-12 col-sm-6"
                 label="Nombre"
                 type="text"
-                v-model="newUser"
-                placeholder="Ingrese el nombre con el que desea ser reconocido"
+                v-model="user"
+                placeholder="Ingrese el nombre con el que desea ser reconocido."
               ></base-input>
               <base-input
+                class="col-12 col-sm-6"
                 label="Password"
                 type="password"
                 placeholder="Password"
                 v-model="password"
-              ></base-input>
-              <base-button native-type="submit" @click="existingLogin" type="primary">Submit</base-button>
-            </form>
-          </div>
+              />
+            </div>
+            <base-button native-type="submit" @click="existingLogin" type="primary">Ingresar</base-button>
+          </form>
         </div>
       </div>
     </div>
@@ -112,12 +98,14 @@
 
 <script>
 import axios from "../../plugins/axios";
+import Modal from '../../components/Modal'
 
 export default {
   data() {
     return {
+      newParticipant: true,
       groups: {},
-      newUser: "",
+      user: "",
       password: "",
     };
   },
@@ -142,9 +130,9 @@ export default {
   },
   methods: {
     newLogin(event) {
-      console.log(this.newUser);
+      console.log(this.user);
       let parametros = {
-        name: this.newUser,
+        name: this.user,
       };
       axios
         .post(
@@ -165,7 +153,7 @@ export default {
     },
     existingLogin(event) {
       let parametros = {
-        name: this.newUser,
+        name: this.user,
         password: this.password,
       };
       axios

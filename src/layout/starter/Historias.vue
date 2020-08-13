@@ -38,7 +38,7 @@ export default {
       stories: [],
 
       received_messages: [],
-      send_message: "Alvaro",
+      send_message: "Alvaro1",
       connected: false,
     };
   },
@@ -90,7 +90,7 @@ export default {
 
   },
   created() {
-    this.$store.getters.currentParticipant
+    this.send_message = this.$store.state.currentUser.name;
     axios.get("/games/" + this.idJuego + "/stories/").then(res => {
       console.log(this.idJuego + "hay algo?");
       this.stories = res.data;
