@@ -172,6 +172,7 @@ export default {
           // this.$store.getters.currentParticipant;
           this.$router.push({name: 'Historias', params: {id: this.$route.params.gameId}})
           console.log("If I print this, wtf.")
+          confirm(`Usted a sido registrado correctamente`);
         });
     },
   },
