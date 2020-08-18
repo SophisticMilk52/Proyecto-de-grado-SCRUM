@@ -24,7 +24,7 @@
     <br />
     <div class="text-center">
       <router-link :to="'/juegos/'+idJuego+'/stories/'+story.id+'/estimation'">
-        <base-button type="success" class="confirmation" v-on:click="estimate">Realizar estimacion</base-button>
+        <base-button type="success" class="confirmation" v-on:click="sendStory">Realizar estimacion</base-button>
       </router-link>
     </div>
   </div>
@@ -68,13 +68,21 @@ export default {
       this.criteria = res.data;
       console.log(this.criteria)
     })
-    
+
   },
   methods: {
-    estimate(e){
-      if(!confirm('Al empezar a estimar, todos los participantes seran redirigidos a la pagina de estimación. ¿Desea continuar?'))
+    sendStory(e){
+      if(!confirm('Al empezar a estimar, todos los participantes seran redirigidos a la pagina de estimación. ¿Desea continuar?')){
         e.preventDefault();
-      console.log("Send request to everyone to estimate this story.")
+      } else {
+        let payload = {
+          storyTitle: this.story.shortDescription,
+          storyId: this.story.id,
+          groupId: this.$store.currentUser.tsscGroup.id
+        }
+
+      }
+      console.log("Send request to everyone to sendStory this story.")
     }
   }
 };
