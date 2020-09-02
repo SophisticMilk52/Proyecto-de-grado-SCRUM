@@ -5,35 +5,12 @@
       <table class="table">
         <tr :key="story.id" v-for="story in stories">
           <td>
-            <!-- <router-link :to="'/juegos/'+idJuego+'/stories/'+story.id">
-              <h3 class="h3-historias">{{story.shortDescription}}</h3>
-            </router-link> -->
               <h3 class="h3-historias" @click="selectStory(story)">{{story.shortDescription}}</h3>
+              <p><i>{{story.description}}</i></p>
           </td>
           <td>
-            <router-link to="/stories">
-              <base-button type="info" @click="notifyTopCenter">Compartir</base-button>
-            </router-link>
+            <!-- Here it will have the current score. -->
           </td>
-          <!-- <td>
-            OPTION 1: HAVE THE TEXT SHOW MORE INFO, AND A BUTTON THAT REDIRECTS EVERYONE TO ESTIMATION PAGE
-            <router-link to="/stories">
-              <base-button type="info" @click="notifyTopCenter">Más Información</base-button>
-            </router-link>
-
-            OPTION 2: HAVE BUTTON THAT SHOWS MODAL WITH MORE INFO
-            <base-button type="primary" @click="modals.modal0 = true">Launch demo modal</base-button>
-            <Modal :show.sync="modals.modal0" type="notice">
-              <template slot="header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              </template>
-              <div>{{story.description}}</div>
-              <template slot="footer">
-                <base-button type="secondary" @click="modals.modal0 = false">Close</base-button>
-                <base-button type="primary">Save changes</base-button>
-              </template>
-            </Modal>
-          </td> -->
         </tr>
       </table>
     </div>
@@ -42,7 +19,6 @@
       <a class="dropdown-item" href="#">Mediana Resolucion</a>
       <a class="dropdown-item" href="#">Alta Resolucion</a>
     </base-dropdown>
-    <button id="send" class="btn btn-default" type="submit" @click.prevent="send">Send</button>
   </div>
 </template>
 
@@ -65,7 +41,14 @@ export default {
       send_message: "Alvaro1",
       connected: false,
       modals: {
-        modal0: false
+        modal0: false,
+        story: {},
+        storyCriteria: []
+      },
+      momo: {
+        isVisible: false,
+        story: {},
+        storyCriteria: []
       }
     };
   },
@@ -77,8 +60,21 @@ export default {
         groupId: this.$store.state.currentUser.tsscGroup.id
       }
       if (this.stompClient && this.stompClient.connected) {
-        this.stompClient.send("/app/selectStory", JSON.stringify(payload), {});
+        if(confirm("¿Esta seguro que quiere que su equipo empiece a estimar esta historia?")){
+          this.stompClient.send("/app/selectStory", JSON.stringify(payload), {});
+        }
       }
+    },
+
+    getDetail(story){
+      this.modals.story = story;
+      console.log(story.shortDescription)
+      this.modals.modal0 = true;
+      // this.modals.isVisible = true;
+      // axios.get(route + "/accriteria/").then(res => {
+      //   this.modal.criteria = res.data;
+      //   this.modal.isVisible = true;
+      // });
     },
 
     notifyBeforeRedirect(storyTitle) {
