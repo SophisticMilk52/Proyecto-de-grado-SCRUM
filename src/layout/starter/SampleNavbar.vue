@@ -81,11 +81,11 @@
                 <p class="d-lg-none">Log out</p>
               </a>
               <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item" @click="perfil()">Profile</a>
+                <a  class="nav-item dropdown-item" @click="perfil()">Profile</a>
               </li>
               <div class="dropdown-divider"></div>
               <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item" v-on:click="SALIR">Log out</a>
+                <a  class="nav-item dropdown-item" v-on:click="SALIR">Log out</a>
               </li>
             </base-dropdown>
           </ul>

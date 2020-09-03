@@ -2,156 +2,82 @@
   <div class="hello">
     <h1 class="text-center">Cronometro</h1>
     <div class="elementos">
-      {{ this.intervalos }}
-      <!-- <table class="table table-striped">
-        <tr>
-          <th>
-            <h3 class="text-center">Intervalo 1</h3>
-          </th>
-          <th>
-            <h3 class="text-center">Intervalo 2</h3>
-          </th>
-          <th>
-            <h3 class="text-center">Intervalo 3</h3>
+      <table class="table table-striped">
+        <tr >
+          <th :key="cron.id" v-for="cron in cronometros">
+            <h3 class="text-center">{{cron.name}}</h3>
           </th>
         </tr>
-        <br />
-
-        <tr>
-          <td>
-            <table>
-              <tr>
+        <tr >
+          <td :key="cron.id" v-for="cron in cronometros">
+            <table >
+              <tr :key="item.id" v-for=" item in intervals[cron.id]">
+                <div>
                 <th>
-                  <h4>Estimacion</h4>
+                  <h4>{{item.name}}</h4>
                 </th>
                 <th>
-                  <h4>Construccion</h4>
+                  <h4>{{item.duration}} segundos</h4>
                 </th>
-              </tr>
-              <tr>
-                <td>
-                  <h5>00:04:00</h5>
-                </td>
-                <td>
-                  <h5>00:02:00</h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h5>00:30:00</h5>
-                </td>
-                <td>
-                  <h5>00:22:00</h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h5>00:04:00</h5>
-                </td>
-                <td>
-                  <h5>00:12:00</h5>
-                </td>
-              </tr>
-            </table>
-          </td>
-          <td>
-            <table>
-              <tr>
-                <th>
-                  <h4>Estimacion</h4>
-                </th>
-                <th>
-                  <h4>Construccion</h4>
-                </th>
-              </tr>
-              <tr>
-                <td>
-                  <h5>00:04:00</h5>
-                </td>
-                <td>
-                  <h5>00:02:00</h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h5>00:30:00</h5>
-                </td>
-                <td>
-                  <h5>00:22:00</h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h5>00:04:00</h5>
-                </td>
-                <td>
-                  <h5>00:12:00</h5>
-                </td>
-              </tr>
-            </table>
-          </td>
-          <td>
-            <table>
-              <tr>
-                <th>
-                  <h4>Estimacion</h4>
-                </th>
-                <th>
-                  <h4>Construccion</h4>
-                </th>
-              </tr>
-              <tr>
-                <td>
-                  <h5>00:04:00</h5>
-                </td>
-                <td>
-                  <h5>00:02:00</h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h5>00:30:00</h5>
-                </td>
-                <td>
-                  <h5>00:22:00</h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h5>00:04:00</h5>
-                </td>
-                <td>
-                  <h5>00:12:00</h5>
-                </td>
+                </div>
               </tr>
             </table>
           </td>
         </tr>
-      </table> -->
+      </table>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "../../plugins/axios";
+import Vue from "vue";
 export default {
-
   data() {
     return {
-      intervalos:[]
+      cronometros: [],
+      intervals: {
+
+      },
     };
   },
   created() {
     // Get TimeControls(cronometros)
-    axios.get("/games/"+this.$route.params.id+"/timecontrols/").then(
-      res => {
-        console.log(res.data)
-        this.intervalos = res.data
-      }
-    )
+    axios
+      .get("/games/" + this.$route.params.id + "/timecontrols/")
+      .then((res) => {
+        console.log(res.data);
+        this.cronometros = res.data;
+        this.cronometros.forEach((element) => {
+          axios
+            .get(
+              "/games/" +
+                this.$route.params.id +
+                "/timecontrols/" +
+                element.id +
+                "/timeintervals/"
+            )
+            .then((rest) => {
+              Vue.set(this.intervals,element.id,rest.data)
+              console.log(rest.data);
+            });
+        });
+      });
 
     // Get TimeIntervals
-  }
+  },
+  methods: {},
+  computed: {
+    // a computed getter
+    filter(){
+     let valores= [];
+    cronometros.forEach(element => {
+     valores.push( element.id)
+    });
+    return valores;
+    }
+  
+  },
 };
 </script>
 
