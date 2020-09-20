@@ -14,11 +14,11 @@
         </tr>
       </table>
     </div>
-    <base-dropdown block class="drop" title="Instrucciones" title-classes="btn btn-info">
+    <!-- <base-dropdown block class="drop" title="Instrucciones" title-classes="btn btn-info">
       <a class="dropdown-item" href="#">Baja Resolucion</a>
       <a class="dropdown-item" href="#">Mediana Resolucion</a>
       <a class="dropdown-item" href="#">Alta Resolucion</a>
-    </base-dropdown>
+    </base-dropdown> -->
   </div>
 </template>
 

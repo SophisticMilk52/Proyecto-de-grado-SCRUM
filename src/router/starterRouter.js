@@ -79,15 +79,19 @@ export default new Router({
           components: { default: Grupo }
         },
         {
-          path: 'resultados',
-          name: 'Resultados',
+          path: 'juegos/:gameId/stories/:storyId/results',
+          name: 'GroupEstimation',
           components: { default: Resultados }
         },
         {
           path: 'msg',
           name: 'Messaging',
           components: { default: Message }
-        }
+        },
+        {
+          path: 'foo',
+          name: 'bar',
+        },
 
 
       ]
