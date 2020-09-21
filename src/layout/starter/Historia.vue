@@ -1,13 +1,7 @@
 <template>
   <div class="hello">
-    <!-- <ul> -->
-    <!---Alvaro aqui dejo en pantalla lo que saque de json pero el codigo de la llamda es el de abajo el de axios---->
-    <!-- <li v-for="(value,index) in info" :key="index"> -->
-    <!-- {{value}} -->
-    <!-- </li> -->
-    <!-- </ul> -->
     <br />
-    <h2 class="text-center">Historia de usuario: {{this.story.shortDescription}}</h2>
+    <h1 class="text-center">Historia de usuario: {{this.story.shortDescription}}</h1>
 
     <div class="elementos">
       <br />
@@ -93,6 +87,7 @@ export default {
   background-color: white;
   border-radius: 25px;
 }
+
 h2,
 p {
   margin-left: 20px;

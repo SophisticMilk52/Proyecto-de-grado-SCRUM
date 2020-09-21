@@ -1,24 +1,20 @@
 <template>
   <div class>
-    <h1 class="text-center">Historias</h1>
+    <h1 class="text-center"><strong>Historias</strong></h1>
     <div class="elementos">
       <table class="table">
         <tr :key="story.id" v-for="story in stories">
           <td>
               <h3 class="h3-historias" @click="selectStory(story)">{{story.shortDescription}}</h3>
-              <p><i>{{story.description}}</i></p>
+              <p><i><strong>{{story.description}}</strong></i></p>
           </td>
           <td>
-            <!-- Here it will have the current score. -->
+         
           </td>
         </tr>
       </table>
     </div>
-    <!-- <base-dropdown block class="drop" title="Instrucciones" title-classes="btn btn-info">
-      <a class="dropdown-item" href="#">Baja Resolucion</a>
-      <a class="dropdown-item" href="#">Mediana Resolucion</a>
-      <a class="dropdown-item" href="#">Alta Resolucion</a>
-    </base-dropdown> -->
+
   </div>
 </template>
 

@@ -3,11 +3,12 @@ import Router from 'vue-router';
 import DashboardLayout from '../layout/starter/SampleLayout.vue';
 import Starter from '../layout/starter/SamplePage.vue';
 import Historias from '../layout/starter/Historias.vue';
-import ProcesoSrcum from '../layout/starter/ProcesoSrcum.vue';
-import Historia from '../layout/starter/Historia.vue';
+import ProcesoSrcum from '../layout/starter/modulo2/ProcesoSrcum.vue';
+import Comportamiento from '../layout/starter/modulo2/Comportamiento.vue';
+import Temporizador from '../layout/starter/modulo2/Temporizador.vue';
+import Detalles from '../layout/starter/modulo2/Detalles.vue';
 import Estimacion from '../layout/starter/Estimacion.vue';
 import Cronometro from '../layout/starter/Cronometro.vue';
-import Instructor from '../layout/starter/Instructor.vue';
 import Grupo from '../layout/starter/Grupo.vue';
 import Resultados from '../layout/starter/Resultados.vue';
 import LinkGenerator from '../layout/starter/LinkGenerator.vue';
@@ -30,10 +31,24 @@ export default new Router({
         },
         {
           path: 'proceso',
-          name: 'Proceso Scrum',
+          name: 'Retrospectiva',
           components: { default: ProcesoSrcum }
         }
-        ,
+        , {
+          path: 'proceso/comportamiento',
+          name: 'Retrospectiva',
+          components: { default: Comportamiento }
+        },
+        , {
+          path: 'proceso/comportamiento/temporizador',
+          name: 'Retrospectiva',
+          components: { default: Temporizador }
+        },
+        , {
+          path: 'proceso/detalles',
+          name: 'Retrospectiva',
+          components: { default: Detalles }
+        },
         {
           path: 'juegos/:id',
           name: 'Historias',
@@ -44,12 +59,6 @@ export default new Router({
           path: 'juegos/:id/links',
           name: 'Enlaces',
           components: { default: LinkGenerator }
-        }
-        ,
-        {
-          path: 'juegos/:id/stories/:id2',
-          name: 'Historia',
-          components: { default: Historia }
         }
         ,
         {
@@ -67,11 +76,6 @@ export default new Router({
           path: 'cronometro/:id',
           name: 'Cronometro',
           components: { default: Cronometro }
-        },
-        {
-          path: 'instructor',
-          name: 'Instructor',
-          components: { default: Instructor }
         },
         {
           path: 'grupo',

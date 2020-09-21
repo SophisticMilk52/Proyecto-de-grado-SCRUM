@@ -1,6 +1,6 @@
 <template>
   <div class>
-    <h1 class="text-center">Juegos</h1>
+    <h1 class="text-center"><strong>Juegos</strong></h1>
     <div class="elementos">
       <table class="table">
         <tr :key="juego.id" v-for="juego in juegos">

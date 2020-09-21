@@ -2,10 +2,10 @@
   <div class="hello">
     <h1 class="text-center">Cronometro</h1>
     <div class="elementos">
-      <table class="table table-striped">
+      <table class="table table-bordered"> 
         <tr >
           <th :key="cron.id" v-for="cron in cronometros">
-            <h3 class="text-center">{{cron.name}}</h3>
+            <h3 class="text-center"><strong>{{cron.name}}</strong></h3>
           </th>
         </tr>
         <tr >
