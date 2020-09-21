@@ -1,6 +1,6 @@
 <template>
   <div class>
-    <h1 class="text-center">Resultados</h1>
+    <h1 class="text-center"><strong>Resultados</strong></h1>
     <div class="elementos">
       <base-button @click="refresh">Refrescar</base-button>
       <!-- <base-button @click="participant">FUCK</base-button> -->
