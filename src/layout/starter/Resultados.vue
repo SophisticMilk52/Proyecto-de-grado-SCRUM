@@ -38,6 +38,7 @@ export default {
     this.participants = []
   },
   mounted(){
+
     console.log(this.participants)
     let estimationRoute = "/games/" + this.$route.params.gameId + "/groups/"
       + this.$store.state.currentUser.tsscGroup.id + "/stories/" + this.$route.params.storyId
@@ -81,16 +82,16 @@ export default {
     return {
       participants: [],
       estimations: [],
-      myScore: 0,
-      myCriteria: [],
-      myTasks: []
+      myScore: this.score,
+      myCriteria: this.criteria,
+      myTasks: this.tasks
     }
   },
 
   props: {
-    myScorer: {type: String},
-    myCriteriar: {type: Array},
-    myTasksr: {type: Array}
+    score: {type: String},
+    criteria: {type: Array},
+    tasks: {type: Array}
   },
 
   methods: {
@@ -136,7 +137,7 @@ export default {
     },
     reEstimate(){
       this.$router.push({path: '/juegos/'+this.$route.params.id+'/stories/'+payload.storyId+'/estimation',
-      props: {myScore: this.$props.myScore, myCriteria: this.$props.myCriteria, myTasks: this.$props.myTasks}})
+      props: {oldScore: this.myScore, oldCriteria: this.myCriteria, oldTasks: this.myTasks}})
     }
   }
 

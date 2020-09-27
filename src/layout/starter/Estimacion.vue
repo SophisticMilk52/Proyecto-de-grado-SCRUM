@@ -47,7 +47,7 @@
                 placeholder="Ingrese el nombre con el que desea ser reconocido."
         ></base-input>-->
         <div class="elementos">
-       
+
              <h3 >Criterios de Aceptacion</h3>
           <base-input>
             <textarea
@@ -59,12 +59,12 @@
             ></textarea>
           </base-input>
           </div>
-      
+
         <div class="elementos">
-        
+
            <h3>Tareas</h3>
           <base-input>
-           
+
             <textarea
               class="form-control"
               v-model="taskComment"
@@ -73,7 +73,7 @@
               placeholder="Escriba las tareas que usted considera son necesarias para completar esta historia."
             ></textarea>
           </base-input>
-       
+
         </div>
       </form>
       <div class="final">
@@ -119,28 +119,31 @@ export default {
       this.criteria = res.data;
       console.log(this.criteria);
     });
-    if (this.$props.myScore != undefined) {
-      change(this.$props.myScore);
+
+    // Apply props if needed
+    if (this.oldScore != undefined) {
+      // change(this.oldScore);
+      console.log(this.oldScore)
     }
-    if (
-      this.$props.myCriteria != undefined &&
-      this.$props.myCriteria.length > 0
-    ) {
-      let e = "";
-      this.$props.myCriteria.forEach((c) => {
-        e += c + "\n";
-      });
-      e.substr(0, e.length - 1);
-      this.criteriaComment = e;
-    }
-    if (this.$props.myTasks != undefined && this.$props.myTasks.length > 0) {
-      let e = "";
-      this.$props.myTasks.forEach((c) => {
-        e += c + "\n";
-      });
-      e.substr(0, e.length - 1);
-      this.taskComment = e;
-    }
+    // if (
+    //   this.oldCriteria != undefined &&
+    //   this.oldCriteria.length > 0
+    // ) {
+    //   let e = "";
+    //   this.oldCriteria.forEach((c) => {
+    //     e += c + "\n";
+    //   });
+    //   e.substr(0, e.length - 1);
+    //   this.criteriaComment = e;
+    // }
+    // if (this.oldTasks != undefined && this.oldTasks.length > 0) {
+    //   let e = "";
+    //   this.oldTasks.forEach((c) => {
+    //     e += c + "\n";
+    //   });
+    //   e.substr(0, e.length - 1);
+    //   this.taskComment = e;
+    // }
   },
   data() {
     return {
@@ -156,9 +159,9 @@ export default {
   },
 
   props: {
-    myScore: { type: String },
-    myCriteria: { type: Array },
-    myTasks: { type: Array },
+    oldScore: {type: String},
+    oldCriteria: {type: Array},
+    oldTasks: {type: Array}
   },
 
   methods: {
@@ -217,7 +220,7 @@ export default {
         console.log("Post Request Complete");
         this.$router.push({ name: "GroupEstimation" });
       });
-      // this.$router.push({name: 'GroupEstimation', props: {myScorer: estimation.stvalue, myCriteriar: estimation.accepcrtit, myTasksr: estimation.tasks} });
+      this.$router.push({name: 'GroupEstimation', props: {myScorer: estimation.stvalue, myCriteriar: estimation.accepcrtit, myTasksr: estimation.tasks} });
     },
   },
 };

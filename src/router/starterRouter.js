@@ -14,6 +14,9 @@ import Resultados from '../layout/starter/Resultados.vue';
 import LinkGenerator from '../layout/starter/LinkGenerator.vue';
 import LoginGuest from '../layout/starter/LoginGuest.vue';
 import Message from '../layout/starter/Message.vue';
+import Games from '../layout/starter/Games.vue';
+import Stories from '../layout/starter/Stories.vue';
+import Estimation from '../layout/starter/Estimation/Estimation.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -93,9 +96,27 @@ export default new Router({
           components: { default: Message }
         },
         {
-          path: 'foo',
-          name: 'bar',
+          // path: 'foo',
+          path: 'mod/games',
+          name: 'foo',
+          component: Games
         },
+        {
+          path: 'foo/bar',
+          name: 'bar',
+          components: { default: Grupo }
+        },
+        {
+          path: 'mod/games/:id',
+          name: 'ModStories',
+          component: Stories
+        },
+        {
+          path: 'est/games/:gameId/stories/:storyId',
+          name: 'Estimationaire',
+          component: Estimation
+        },
+
 
 
       ]

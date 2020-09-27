@@ -9,12 +9,12 @@
               <p><i><strong>{{story.description}}</strong></i></p>
           </td>
           <td>
-         
+            <!-- NECESITAMOS FORMA DE MOSTRAR PUNTAJES AQUI -->
           </td>
         </tr>
       </table>
     </div>
-
+  <base-button>Asignar a Sprint</base-button>
   </div>
 </template>
 
