@@ -18,7 +18,7 @@
     <br />
     <div class="text-center">
       <router-link :to="'/juegos/'+idJuego+'/stories/'+story.id+'/estimation'">
-        <base-button type="success" class="confirmation" v-on:click="sendStory">Realizar estimacion</base-button>
+        <base-button type="primary" class="confirmation" v-on:click="sendStory">Realizar estimacion</base-button>
       </router-link>
     </div>
   </div>

@@ -8,6 +8,7 @@
           <th>No. de Grupos</th>
           <th>Historias</th>
           <th>Enlaces</th>
+          <th>No. de Participantes</th>
           <th>Participantes</th>
         </tr>
       </thead>
@@ -17,7 +18,8 @@
           <td>{{g.ngroups}}</td>
           <td><base-button class="btn" type="primary" @click='$router.push({name: "ModStories", params: {id: g.id}})'>Visualizar</base-button></td>
           <td><base-button class="btn" type="primary" @click='$router.push({name: "Enlaces", params: {id: g.id}})'>Visualizar</base-button></td>
-          <td><base-button class="btn" type="primary" @click='console.log("btn 3 pressed")'>Visualizar</base-button></td>
+          <td>{{g.ngroups}}</td>
+          <td><base-button class="btn" type="primary" @click='console.log("btn 3 pressed")'>Visualizar</base-button></td>  
         </tr>
       </tbody>
     </table>

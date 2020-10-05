@@ -3,10 +3,10 @@ import Router from 'vue-router';
 import DashboardLayout from '../layout/starter/SampleLayout.vue';
 import Starter from '../layout/starter/SamplePage.vue';
 import Historias from '../layout/starter/Historias.vue';
-import ProcesoSrcum from '../layout/starter/modulo2/ProcesoSrcum.vue';
-import Comportamiento from '../layout/starter/modulo2/Comportamiento.vue';
-import Temporizador from '../layout/starter/modulo2/Temporizador.vue';
-import Detalles from '../layout/starter/modulo2/Detalles.vue';
+import ProcesoSrcum from '../layout/starter/Retrospective/ProcesoSrcum.vue';
+import Editar from '../layout/starter/Retrospective/Editar.vue';
+import ResultadosSprint from '../layout/starter/Retrospective/ResultadosSprint.vue';
+import Detalles from '../layout/starter/Retrospective/Detalles.vue';
 import Estimacion from '../layout/starter/Estimacion.vue';
 import Cronometro from '../layout/starter/Cronometro.vue';
 import Grupo from '../layout/starter/Grupo.vue';
@@ -24,7 +24,7 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      redirect: '/juegos',
+      redirect: '/mod/games/',
       component: DashboardLayout,
       children: [
         {
@@ -38,14 +38,14 @@ export default new Router({
           components: { default: ProcesoSrcum }
         }
         , {
-          path: 'proceso/comportamiento',
+          path: 'proceso/edit',
           name: 'Retrospectiva',
-          components: { default: Comportamiento }
+          components: { default: Editar }
         },
         , {
-          path: 'proceso/comportamiento/temporizador',
+          path: 'proceso/resultados',
           name: 'Retrospectiva',
-          components: { default: Temporizador }
+          components: { default: ResultadosSprint }
         },
         , {
           path: 'proceso/detalles',

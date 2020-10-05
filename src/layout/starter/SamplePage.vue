@@ -11,12 +11,12 @@
           </td>
             <td>
               <router-link :to="'/juegos/'+juego.id+'/links/'">
-              <base-button class="btn" type="info">links</base-button>
+              <base-button class="btn" type="primary">links</base-button>
             </router-link>
           </td>
           <td>
               <router-link :to="'/cronometro/'+juego.id">
-              <base-button class="btn" type="info">Cronometro</base-button>
+              <base-button class="btn" type="primary">Cronometro</base-button>
             </router-link>
           </td>
         </tr>

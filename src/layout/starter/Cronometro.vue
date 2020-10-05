@@ -1,16 +1,20 @@
 <template>
   <div class="hello">
     <h1 class="text-center"><strong>Cronometro</strong></h1>
-    <div class="elementos">
-      <table class="table table-bordered"> 
-        <tr >
+
+       <table class="table">
+      <thead class="table-head">
+         <tr >
           <th :key="cron.id" v-for="cron in cronometros">
             <h3 class="text-center"><strong>{{cron.name}}</strong></h3>
           </th>
         </tr>
+      </thead>
+      <tbody>
         <tr >
           <td :key="cron.id" v-for="cron in cronometros">
-            <table >
+           <table>
+              <tbody class="table-body">
               <tr :key="item.id" v-for=" item in intervals[cron.id]" >
                 <div>
                 <th>
@@ -21,12 +25,13 @@
                 </th>
                 </div>
               </tr>
+               </tbody>
             </table>
           </td>
         </tr>
-      </table>
+      </tbody>
+    </table>
     </div>
-  </div>
 </template>
 
 <script>

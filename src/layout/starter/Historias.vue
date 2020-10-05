@@ -14,7 +14,7 @@
         </tr>
       </table>
     </div>
-  <base-button>Asignar a Sprint</base-button>
+  <base-button style="primary">Asignar a Sprint</base-button>
   </div>
 </template>
 
