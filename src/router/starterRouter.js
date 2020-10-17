@@ -17,6 +17,7 @@ import Message from '../layout/starter/Message.vue';
 import Games from '../layout/starter/Games.vue';
 import Stories from '../layout/starter/Stories.vue';
 import Estimation from '../layout/starter/Estimation/Estimation.vue';
+import Participants from '../layout/starter/Participants.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -24,11 +25,11 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      redirect: '/juegos',
+      redirect: '/games',
       component: DashboardLayout,
       children: [
         {
-          path: 'juegos',
+          path: 'games',
           name: 'Juegos',
           components: { default: Starter }
         },
@@ -53,25 +54,26 @@ export default new Router({
           components: { default: Detalles }
         },
         {
-          path: 'juegos/:id',
+          path: 'games/:id',
           name: 'Historias',
           components: { default: Historias }
         }
         ,
         {
-          path: 'juegos/:id/links',
+          path: 'games/:id/links',
           name: 'Enlaces',
           components: { default: LinkGenerator }
         }
         ,
+
         {
-          path: 'juegos/:gameId/group/:groupId/login/:pass',
+          path: 'games/:gameId/group/:groupId/login/:pass',
           name: 'Ingreso Participante',
           components: { default: LoginGuest }
         }
         ,
         {
-          path: 'juegos/:gameId/stories/:storyId/estimation',
+          path: 'games/:gameId/stories/:storyId/estimation',
           name: 'Estimacion',
           components: { default: Estimacion }
         },
@@ -86,7 +88,7 @@ export default new Router({
           components: { default: Grupo }
         },
         {
-          path: 'juegos/:gameId/stories/:storyId/results',
+          path: 'games/:gameId/stories/:storyId/results',
           name: 'GroupEstimation',
           components: { default: Resultados }
         },
@@ -112,10 +114,16 @@ export default new Router({
           component: Stories
         },
         {
+          path: 'mod/games/:id/participants',
+          name: 'Participantes',
+          component: Participants
+        },
+        {
           path: 'est/games/:gameId/stories/:storyId',
           name: 'Estimationaire',
           component: Estimation
         },
+
 
 
 

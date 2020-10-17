@@ -1,12 +1,26 @@
 <template>
 <div>
+  <base-button class="btn" type="secondary" @click='$router.go(-1)'>Atras</base-button>
+  <base-button class="btn" type="secondary" @click='refresh'>Refresh</base-button>
   <h1 class="text-center"><strong>Participantes</strong></h1>
-  <base-input class="col-md-4" label="State">
-    <select id="inputState" class="form-control">
-      <option selected>Choose...</option>
-      <option>...</option>
-    </select>
-  </base-input>
+    <table class="table">
+      <thead class="table-head">
+        <tr>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Contraseña</th>
+          <th>Grupo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr :key="p.id" v-for="p in participants">
+          <td>{{p.name}}</td>
+          <td>{{p.email}}</td>
+          <td>{{p.password}}</td>
+          <td>{{p.tsscGroup.id}}</td>
+        </tr>
+      </tbody>
+    </table>
 </div>
 
 </template>
@@ -19,19 +33,26 @@ export default {
   },
   mounted(){
     axios
-    .get("/games/" + this.$route.params.id + "/groups/")
+    .get("/games/" + this.$route.params.id + "/participants/")
     .then(res => {
         console.log(res.data);
-        this.groups = res.data;
+        this.participants = res.data;
       });
   },
   data(){
     return {
-      groups
+      participants: []
     }
   },
   methods: {
-
+    refresh(){
+      axios
+      .get("/games/" + this.$route.params.id + "/participants/")
+      .then(res => {
+          console.log(res.data);
+          this.participants = res.data;
+      });
+    }
   }
 }
 </script>
