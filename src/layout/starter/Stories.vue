@@ -1,6 +1,5 @@
 <template>
 <div>
-  <base-button class="btn" type="secondary" @click='$router.go(-1)'>Atras</base-button>
   <h1 class="text-center"><strong>Historias</strong></h1>
   <table class="table">
     <tr :key="s.id" v-for="s in stories">
@@ -36,6 +35,11 @@
 import axios from '../../plugins/axios'
 import Modal from '../../components/Modal'
 export default {
+  props: {
+    gameId: {
+      type: String
+    }
+  },
   components: {
     Modal
   },
@@ -44,7 +48,8 @@ export default {
   },
   mounted(){
     axios
-    .get("/games/" + this.$route.params.id + "/stories/")
+    // .get("/games/" + this.$route.params.id + "/stories/")
+    .get("/games/" + this.gameId + "/stories/")
     .then(res => this.stories = res.data)
   },
   data(){
@@ -59,7 +64,8 @@ export default {
   methods: {
     retrieveCriteria(id){
       axios
-      .get("/games/" + this.$route.params.id + "/stories/" + id + "/accriteria/")
+      // .get("/games/" + this.$route.params.id + "/stories/" + id + "/accriteria/")
+      .get("/games/" + this.gameId + "/stories/" + id + "/accriteria/")
       .then(res => this.currentCriteria = res.data)
       this.modals.modal0 = true
     }

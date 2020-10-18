@@ -18,6 +18,7 @@ import Games from '../layout/starter/Games.vue';
 import Stories from '../layout/starter/Stories.vue';
 import Estimation from '../layout/starter/Estimation/Estimation.vue';
 import Participants from '../layout/starter/Participants.vue';
+import GameModerator from '../layout/starter/GameModerator.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -122,6 +123,11 @@ export default new Router({
           path: 'est/games/:gameId/stories/:storyId',
           name: 'Estimationaire',
           component: Estimation
+        },
+        {
+          path: 'games/:gameId/moderator/:modPwd',
+          name: 'Game Moderator',
+          component: GameModerator
         },
 
 

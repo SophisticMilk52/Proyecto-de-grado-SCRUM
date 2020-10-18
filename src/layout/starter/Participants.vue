@@ -1,6 +1,5 @@
 <template>
 <div>
-  <base-button class="btn" type="secondary" @click='$router.go(-1)'>Atras</base-button>
   <base-button class="btn" type="secondary" @click='refresh'>Refresh</base-button>
   <h1 class="text-center"><strong>Participantes</strong></h1>
     <table class="table">
@@ -28,16 +27,15 @@
 <script>
 import axios from '../../plugins/axios'
 export default {
+  props: {
+    gameId: {
+      type: String
+    }
+  },
   created(){
-
+    this.refresh();
   },
   mounted(){
-    axios
-    .get("/games/" + this.$route.params.id + "/participants/")
-    .then(res => {
-        console.log(res.data);
-        this.participants = res.data;
-      });
   },
   data(){
     return {
@@ -47,7 +45,8 @@ export default {
   methods: {
     refresh(){
       axios
-      .get("/games/" + this.$route.params.id + "/participants/")
+      // .get("/games/" + this.$route.params.id + "/participants/")
+      .get("/games/" + this.gameId + "/participants/")
       .then(res => {
           console.log(res.data);
           this.participants = res.data;
