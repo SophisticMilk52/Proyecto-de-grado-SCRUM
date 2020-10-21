@@ -22,9 +22,9 @@
       @click="compShown=='partlist' ? compShown='none' : compShown='partlist'"
       >Participantes</base-button>
     </div>
-    <Stories v-if="compShown=='storylist'"  :gameId="this.$route.params.gameId"/>
-    <LinkGenerator v-if="compShown=='grouplist'" :gameId="this.$route.params.gameId" />
-    <Participants v-if="compShown=='partlist'" :gameId="this.$route.params.gameId" />
+    <StoryList v-if="compShown=='storylist'" type="moderator" :gameId="this.$route.params.gameId"/>
+    <LinkList v-if="compShown=='grouplist'" :gameId="this.$route.params.gameId" />
+    <ParticipantList v-if="compShown=='partlist'" :gameId="this.$route.params.gameId" />
   </div>
   <div v-else>
     <h1 class="text-center"><strong>401: NO AUTORIZADO</strong></h1>
@@ -35,35 +35,37 @@
 </template>
 
 <script>
-import axios from '../../plugins/axios'
-import Stories from './Stories.vue'
-import LinkGenerator from './LinkGenerator.vue'
-import Participants from './Participants.vue'
+import axios from '../plugins/axios'
+import StoryList from '../components-tssc/StoryList.vue'
+import LinkList from '../components-tssc/LinkList.vue'
+import ParticipantList from '../components-tssc/ParticipantList.vue'
 export default {
   components: {
-    Stories, LinkGenerator, Participants
+    StoryList, LinkList, ParticipantList
   },
   created(){
-    axios
-    .get("/games/" + this.$route.params.gameId + "/moderator/" + this.$route.params.modPwd)
-    .then(
-      res => {
-        this.isAuthorized = true;
-        this.gameData = res.data;
-        this.isReady = true;
-      }
-    ).catch(
-      () => {
-        this.isAuthorized = false;
-        this.isReady = true;
-      }
-    )
+    this.retrieveData()
   },
   mounted(){
 
   },
   methods: {
-
+    retrieveData(){
+      axios.get("/games/" + this.$route.params.gameId + "/moderator/" + this.$route.params.modPwd)
+      .then(
+        res => {
+          this.isAuthorized = true;
+          this.gameData = res.data;
+          this.isReady = true;
+        }
+      )
+      .catch(
+        () => {
+          this.isAuthorized = false;
+          this.isReady = true;
+        }
+      )
+    }
 
   },
   data(){

@@ -2,8 +2,10 @@
   <div class="wrapper">
     <side-bar>
       <template slot="links">
-        <sidebar-link to="/juegos" :name="$t('Estimacion')" icon="tim-icons icon-molecule-40" />
-        <sidebar-link to="/proceso" :name="$t('Retrospectiva')" icon="tim-icons icon-chart-pie-36" />
+        <sidebar-link to="/games" :name="$t('Estimacion')" icon="tim-icons icon-minimal-right" />
+        <sidebar-link to="/proceso" :name="$t('Sprint Backlog')" icon="tim-icons icon-minimal-right" />
+        <sidebar-link to="/proceso" :name="$t('Desarrollo')" icon="tim-icons icon-minimal-right" />
+        <sidebar-link to="/proceso" :name="$t('Retrospectiva')" icon="tim-icons icon-minimal-right" />
       </template>
     </side-bar>
     <div class="main-panel">

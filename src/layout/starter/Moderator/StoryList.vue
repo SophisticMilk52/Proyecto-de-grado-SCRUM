@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import axios from '../../plugins/axios'
-import Modal from '../../components/Modal'
+import axios from '../../../plugins/axios'
+import Modal from '../../../components/Modal'
 export default {
   props: {
     gameId: {

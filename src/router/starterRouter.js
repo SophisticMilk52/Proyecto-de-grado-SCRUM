@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import DashboardLayout from '../layout/starter/SampleLayout.vue';
+import ModeratorView from '../views-tssc/ModeratorView';
+import BacklogView from '../views-tssc/BacklogView';
+import LoginView from '../views-tssc/LoginView';
 import Starter from '../layout/starter/SamplePage.vue';
 import Historias from '../layout/starter/Historias.vue';
 import ProcesoSrcum from '../layout/starter/modulo2/ProcesoSrcum.vue';
@@ -11,14 +14,9 @@ import Estimacion from '../layout/starter/Estimacion.vue';
 import Cronometro from '../layout/starter/Cronometro.vue';
 import Grupo from '../layout/starter/Grupo.vue';
 import Resultados from '../layout/starter/Resultados.vue';
-import LinkGenerator from '../layout/starter/LinkGenerator.vue';
-import LoginGuest from '../layout/starter/LoginGuest.vue';
 import Message from '../layout/starter/Message.vue';
 import Games from '../layout/starter/Games.vue';
-import Stories from '../layout/starter/Stories.vue';
 import Estimation from '../layout/starter/Estimation/Estimation.vue';
-import Participants from '../layout/starter/Participants.vue';
-import GameModerator from '../layout/starter/GameModerator.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -33,6 +31,21 @@ export default new Router({
           path: 'games',
           name: 'Juegos',
           components: { default: Starter }
+        },
+        {
+          path: 'games/:gameId/moderator/:modPwd',
+          name: 'Moderator View',
+          component: ModeratorView
+        },
+        {
+          path: 'games/:id/group/:id2',
+          name: 'Backlog',
+          components: { default: BacklogView }
+        },
+        {
+          path: 'games/:gameId/group/:groupId/login/:pwd',
+          name: 'Ingreso Participante',
+          components: { default: LoginView }
         },
         {
           path: 'proceso',
@@ -58,19 +71,6 @@ export default new Router({
           path: 'games/:id',
           name: 'Historias',
           components: { default: Historias }
-        }
-        ,
-        {
-          path: 'games/:id/links',
-          name: 'Enlaces',
-          components: { default: LinkGenerator }
-        }
-        ,
-
-        {
-          path: 'games/:gameId/group/:groupId/login/:pass',
-          name: 'Ingreso Participante',
-          components: { default: LoginGuest }
         }
         ,
         {
@@ -110,30 +110,21 @@ export default new Router({
           components: { default: Grupo }
         },
         {
-          path: 'mod/games/:id',
-          name: 'ModStories',
-          component: Stories
-        },
-        {
-          path: 'mod/games/:id/participants',
-          name: 'Participantes',
-          component: Participants
-        },
-        {
           path: 'est/games/:gameId/stories/:storyId',
           name: 'Estimationaire',
           component: Estimation
         },
-        {
-          path: 'games/:gameId/moderator/:modPwd',
-          name: 'Game Moderator',
-          component: GameModerator
-        },
+
 
 
 
 
       ]
-    }
+    },
+    // {
+    //   path: 'games/:gameId/moderator/:modPwd',
+    //   name: 'Moderator View',
+    //   component: ModeratorView
+    // },
   ]
 });
