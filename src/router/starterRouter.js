@@ -4,6 +4,7 @@ import DashboardLayout from '../layout/starter/SampleLayout.vue';
 import ModeratorView from '../views-tssc/ModeratorView';
 import BacklogView from '../views-tssc/BacklogView';
 import LoginView from '../views-tssc/LoginView';
+import UnauthView from '../views-tssc/UnauthView';
 import Starter from '../layout/starter/SamplePage.vue';
 import Historias from '../layout/starter/Historias.vue';
 import ProcesoSrcum from '../layout/starter/modulo2/ProcesoSrcum.vue';
@@ -17,9 +18,10 @@ import Resultados from '../layout/starter/Resultados.vue';
 import Message from '../layout/starter/Message.vue';
 import Games from '../layout/starter/Games.vue';
 import Estimation from '../layout/starter/Estimation/Estimation.vue';
+import store from '../plugins/store';
 Vue.use(Router);
 
-export default new Router({
+let router = new Router({
   routes: [
     {
       path: '/',
@@ -38,9 +40,17 @@ export default new Router({
           component: ModeratorView
         },
         {
+          path: 'unauth',
+          name: 'Not Logged In',
+          component: UnauthView
+        },
+        {
           path: 'games/:id/group/:id2',
           name: 'Backlog',
-          components: { default: BacklogView }
+          components: { default: BacklogView },
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: 'games/:gameId/group/:groupId/login/:pwd',
@@ -127,4 +137,19 @@ export default new Router({
     //   component: ModeratorView
     // },
   ]
-});
+
+})
+
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)){
+    if(store.getters.isLoggedIn){
+      next()
+      return
+    }
+    next("/unauth")
+  } else {
+    next()
+  }
+})
+
+export default router;

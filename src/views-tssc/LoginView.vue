@@ -143,7 +143,8 @@ export default {
             this.$notify({type: "success",
             message: "Se ha registrado exitosamente! Revisa tu correo para tu contraseña."})
             this.$store.commit("login", this.groups);
-            this.$router.push({name: 'Historias', params: {id: this.$route.params.gameId}})
+            this.$router.push({name: 'Backlog', params: {id: this.$route.params.id,
+            id2: res.data.tsscGroup.id}})
         });
       }
     },

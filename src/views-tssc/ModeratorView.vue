@@ -8,20 +8,21 @@
     <div class="text-center">
       <base-button
       class="btn"
-      type="primary"
+      :type="compShown=='storylist' ? 'primary' : 'secondary'"
       @click="compShown=='storylist' ? compShown='none' : compShown='storylist'"
       >Historias</base-button>
       <base-button
       class="btn"
-      type="primary"
+      :type="compShown=='grouplist' ? 'primary' : 'secondary'"
       @click="compShown=='grouplist' ? compShown='none' : compShown='grouplist'"
       >Grupos</base-button>
       <base-button
       class="btn"
-      type="primary"
+      :type="compShown=='partlist' ? 'primary' : 'secondary'"
       @click="compShown=='partlist' ? compShown='none' : compShown='partlist'"
       >Participantes</base-button>
     </div>
+    <br><br>
     <StoryList v-if="compShown=='storylist'" type="moderator" :gameId="this.$route.params.gameId"/>
     <LinkList v-if="compShown=='grouplist'" :gameId="this.$route.params.gameId" />
     <ParticipantList v-if="compShown=='partlist'" :gameId="this.$route.params.gameId" />
