@@ -91,7 +91,15 @@ export default {
               this.notifyBeforeRedirect(payload.storyTitle);
               // Possibly replace with confirm notification (or other similar one with just an ok option)
               // this.$router.push({name: 'Estimacion', params: {gameId: this.$route.params.gameId, storyId: payload.storyId}});
-              this.$router.push({path: '/games/'+this.$route.params.id+'/stories/'+payload.storyId+'/estimation'});
+              // this.$router.push({path: '/games/'+this.$route.params.id+'/stories/'+payload.storyId+'/estimation'});
+              this.$router.push({
+                name: 'Estimation',
+                params: {
+                  gameId: this.$route.params.id,
+                  groupId: this.$route.params.id2,
+                  storyId: payload.storyId
+                  }
+              });
             }
 
 

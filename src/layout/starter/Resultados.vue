@@ -9,18 +9,26 @@
         <tr>
           <th>Nombre</th>
           <th>Puntaje</th>
-          <th>C. de Aceptacion</th>
+          <th>Criterios de Aceptacion</th>
           <th>Tareas</th>
+          <th></th>
         </tr>
         <tr :key="e.id" v-for="e in estimations">
           <!-- <td>{{findName(e.participantId)}}</td> -->
-          <td v-if="allEstimated()">{{e.participantId}}</td><td v-else>*****</td>
+          <td v-if="allEstimated()">{{e.author}}</td><td v-else>*****</td>
           <td>{{e.stvalue}}</td>
-          <td v-if="e.accepcrtit !=null">{{e.accepcrtit}}</td><td v-else></td>
+          <td v-if="e.criteria !=null">{{e.criteria}}</td><td v-else></td>
           <td v-if="e.tasks !=null">{{e.tasks}}</td><td v-else></td>
+          <td v-if="writtenByMe(e)">
+            <base-button class="btn" size="sm" type="secondary">
+              Reestimar
+            </base-button>
+          </td>
+          <td v-else></td>
         </tr>
       </table>
     </div>
+    <EstimationForm />
       <div class="text-center">
       <base-button type="success" @click="reEstimate">Re-estimar</base-button>
     <router-link to="/stories">
@@ -32,7 +40,9 @@
 
 <script>
 import axios from '../../plugins/axios'
+import EstimationForm from '../../components-tssc/EstimationForm'
 export default {
+  components: {EstimationForm},
   created(){
     this.estimations = []
     this.participants = []
@@ -106,6 +116,9 @@ export default {
     },
     allEstimated(){
       return this.estimations.length == this.participants.length
+    },
+    writtenByMe(estimation){
+      return this.$store.state.currentUser.id == estimation.participantId
     },
     refresh(){
       console.log(this.participants)
