@@ -29,7 +29,8 @@ export default new Vuex.Store({
   getters: {
     currentParticipant(state){
       console.log("The state has user: " + state.currentUser.name + " with id " + state.currentUser.id);
-    }
+    },
+    isLoggedIn: state => !!state.currentUser.id
   }
 
 })

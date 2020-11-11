@@ -22,9 +22,9 @@
       @click="compShown=='partlist' ? compShown='none' : compShown='partlist'"
       >Participantes</base-button>
     </div>
-    <Stories v-if="compShown=='storylist'"  :gameId="this.$route.params.gameId"/>
-    <LinkGenerator v-if="compShown=='grouplist'" :gameId="this.$route.params.gameId" />
-    <Participants v-if="compShown=='partlist'" :gameId="this.$route.params.gameId" />
+    <StoryList v-if="compShown=='storylist'"  :gameId="this.$route.params.gameId"/>
+    <LinkList v-if="compShown=='grouplist'" :gameId="this.$route.params.gameId" />
+    <ParticipantList v-if="compShown=='partlist'" :gameId="this.$route.params.gameId" />
   </div>
   <div v-else>
     <h1 class="text-center"><strong>401: NO AUTORIZADO</strong></h1>
@@ -35,13 +35,13 @@
 </template>
 
 <script>
-import axios from '../../plugins/axios'
-import Stories from './Stories.vue'
-import LinkGenerator from './LinkGenerator.vue'
-import Participants from './Participants.vue'
+import axios from '../../../plugins/axios'
+import StoryList from './StoryList'
+import LinkList from './LinkList.vue'
+import ParticipantList from './ParticipantList.vue'
 export default {
   components: {
-    Stories, LinkGenerator, Participants
+    StoryList, LinkList, ParticipantList
   },
   created(){
     axios
