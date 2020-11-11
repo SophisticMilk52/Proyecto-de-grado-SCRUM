@@ -92,6 +92,7 @@ export default {
     // Causes of Error:
     // • Wrong password
     // • Game is not active
+    console.log("I EXIST")
     this.retrieveData();
   },
   methods: {
@@ -143,8 +144,8 @@ export default {
             this.$notify({type: "success",
             message: "Se ha registrado exitosamente! Revisa tu correo para tu contraseña."})
             this.$store.commit("login", this.groups);
-            this.$router.push({name: 'Backlog', params: {id: this.$route.params.gameId,
-            id2: res.data.tsscGroup.id}})
+            this.$router.push({name: 'Backlog', params: {gameId: this.$route.params.gameId,
+            groupId: res.data.tsscGroup.id}})
         });
       }
     },
@@ -171,8 +172,8 @@ export default {
             this.groups = res.data;
             this.$notify({type: "success", message: "¡Bienvenido al juego!"})
             this.$store.commit("login", this.groups);
-            this.$router.push({name: 'Backlog', params: {id: this.$route.params.gameId,
-            id2: res.data.tsscGroup.id }})
+            this.$router.push({name: 'Backlog', params: {gameId: this.$route.params.gameId,
+            groupId: res.data.tsscGroup.id }})
         });
       }
     },

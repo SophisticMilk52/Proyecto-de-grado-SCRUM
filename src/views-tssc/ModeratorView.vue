@@ -9,6 +9,21 @@
       <base-button
       class="btn"
       :type="compShown=='storylist' ? 'primary' : 'secondary'"
+      @click="switchList('storylist')"
+      >Historias</base-button>
+      <base-button
+      class="btn"
+      :type="compShown=='grouplist' ? 'primary' : 'secondary'"
+      @click="switchList('grouplist')"
+      >Grupos</base-button>
+      <base-button
+      class="btn"
+      :type="compShown=='partlist' ? 'primary' : 'secondary'"
+      @click="switchList('partlist')"
+      >Participantes</base-button>
+      <!-- <base-button
+      class="btn"
+      :type="compShown=='storylist' ? 'primary' : 'secondary'"
       @click="compShown=='storylist' ? compShown='none' : compShown='storylist'"
       >Historias</base-button>
       <base-button
@@ -20,12 +35,20 @@
       class="btn"
       :type="compShown=='partlist' ? 'primary' : 'secondary'"
       @click="compShown=='partlist' ? compShown='none' : compShown='partlist'"
-      >Participantes</base-button>
+      >Participantes</base-button> -->
     </div>
     <br><br>
-    <StoryList v-if="compShown=='storylist'" type="moderator" :gameId="this.$route.params.gameId"/>
-    <LinkList v-if="compShown=='grouplist'" :gameId="this.$route.params.gameId" />
-    <ParticipantList v-if="compShown=='partlist'" :gameId="this.$route.params.gameId" />
+    <StoryList v-if="compShown=='storylist'" type="moderator" :stories="stories">
+    <!-- <StoryList v-if="compShown=='storylist'" type="moderator" :gameId="this.$route.params.gameId"> -->
+      <template v-slot:header>
+        <h2 class="text-center"><strong>Historias</strong></h2>
+      </template>
+    </StoryList>
+    <LinkList v-if="compShown=='grouplist'" :gameId="this.$route.params.gameId" :groups="groups" />
+    <!-- <LinkList v-if="compShown=='grouplist'" :gameId="this.$route.params.gameId" /> -->
+    <!-- <ParticipantList v-if="compShown=='partlist'" :gameId="this.$route.params.gameId" /> -->
+    <ParticipantList v-if="compShown=='partlist'" :participants="participants" />
+    <!-- <ParticipantList v-if="compShown=='partlist'" :gameId="this.$route.params.gameId" /> -->
   </div>
   <div v-else>
     <h1 class="text-center"><strong>401: NO AUTORIZADO</strong></h1>
@@ -66,7 +89,53 @@ export default {
           this.isReady = true;
         }
       )
-    }
+    },
+
+    switchList(input){
+      switch(input){
+        case this.compShown:
+          this.compShown = "none"
+          break;
+
+        case "storylist":
+          this.retrieveStories()
+          this.compShown = "storylist"
+          break;
+
+        case "grouplist":
+          this.retrieveLinks()
+          this.compShown = "grouplist"
+          break;
+
+        case "partlist":
+          this.retrieveParticipants()
+          this.compShown = "partlist"
+          break;
+      }
+
+    },
+
+    retrieveStories(){
+      console.log("Retrieve stories activated")
+      axios
+      .get("/games/" + this.$route.params.gameId + "/stories/")
+      .then(res => this.stories = res.data)
+      console.log("Stories:", this.stories)
+    },
+
+    retrieveLinks(){
+      axios
+      .get("/games/" + this.$route.params.gameId + "/groups/")
+      .then(res => this.groups = res.data);
+    },
+
+    retrieveParticipants(){
+      axios
+      .get("/games/" + this.$route.params.gameId + "/participants/")
+      .then(res => { this.participants = res.data });
+    },
+
+
 
   },
   data(){
@@ -75,6 +144,9 @@ export default {
       isReady: false,
       isAuthorized: false,
       compShown: "none",
+      stories: [],
+      groups: [],
+      participants: []
     }
   }
 

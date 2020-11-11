@@ -30,16 +30,20 @@ export default {
   props: {
     gameId: {
       type: String
+    },
+    participants: {
+      type: Array,
+      default: []
     }
   },
   created(){
-    this.refresh();
+    // this.refresh();
   },
   mounted(){
   },
   data(){
     return {
-      participants: []
+      // participants: []
     }
   },
   methods: {

@@ -6,6 +6,8 @@ import BacklogView from '../views-tssc/BacklogView';
 import EstimationView from '../views-tssc/EstimationView';
 import ReestimationView from '../views-tssc/ReestimationView';
 import GroupEstimationView from '../views-tssc/GroupEstimationView';
+import SprintBacklogView from '../views-tssc/SprintBacklogView';
+import RetrospectiveView from '../views-tssc/RetrospectiveView';
 import LoginView from '../views-tssc/LoginView';
 import UnauthView from '../views-tssc/UnauthView';
 import Starter from '../layout/starter/SamplePage.vue';
@@ -25,7 +27,7 @@ import store from '../plugins/store';
 Vue.use(Router);
 
 let router = new Router({
-  // base: "/agile-tool",
+  base: "agile-tool",
   routes: [
     {
       path: '/',
@@ -34,6 +36,12 @@ let router = new Router({
       component: DashboardLayout,
       children: [
         {
+          path: 'games/:gameId/groups/:groupId/login/:pwd',
+          name: 'Ingreso Participante',
+          components: { default: LoginView }
+        },
+        {
+          // TODO Delete or replace with Home View.
           path: 'games',
           name: 'Juegos',
           components: { default: Starter }
@@ -49,9 +57,28 @@ let router = new Router({
           component: UnauthView
         },
         {
-          path: 'games/:id/groups/:id2',
+          // path: 'games/:id/groups/:id2/backlog',
+          path: 'games/:gameId/groups/:groupId/backlog',
           name: 'Backlog',
           components: { default: BacklogView },
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          // path: 'games/:id/groups/:id2/backlog',
+          path: 'games/:gameId/groups/:groupId/sprint/new',
+          name: 'Sprint Backlog',
+          components: { default: SprintBacklogView },
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          // path: 'games/:id/groups/:id2/backlog',
+          path: 'games/:gameId/groups/:groupId/sprint/:sprintId',
+          name: 'Retrospective',
+          components: { default: RetrospectiveView },
           meta: {
             requiresAuth: true
           }
@@ -80,11 +107,7 @@ let router = new Router({
             requiresAuth: true
           }
         },
-        {
-          path: 'games/:gameId/groups/:groupId/login/:pwd',
-          name: 'Ingreso Participante',
-          components: { default: LoginView }
-        },
+
         {
           path: 'proceso',
           name: 'Retrospectiva',

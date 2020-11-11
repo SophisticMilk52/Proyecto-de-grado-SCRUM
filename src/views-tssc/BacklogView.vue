@@ -13,12 +13,29 @@
         </tr>
       </table>
     </div> -->
-    <StoryList
-    type="estimation"
-    :gameId="this.$route.params.id"
-    :groupId="this.$route.params.id2"
-    v-on:select="selectStory"
-    />
+    <StoryList type="estimation" :stories="stories" v-on:select="selectStory">
+      <template v-slot:header>
+        <h1 class="text-center"><strong>Backlog</strong></h1>
+      </template>
+      <template v-slot:description>
+        <h4 class="text-center">
+          Seleccione historias y estime en puntos la cantidad de esfuerzo que necesitara para
+          entregarlas completas al cliente.
+        </h4>
+      </template>
+    </StoryList>
+    <!-- <StoryList type="estimation" :gameId="this.$route.params.gameId"
+    :groupId="this.$route.params.groupId" v-on:select="selectStory">
+      <template v-slot:header>
+        <h1 class="text-center"><strong>Backlog</strong></h1>
+      </template>
+      <template v-slot:description>
+        <h4 class="text-center">
+          Seleccione historias y estime en puntos la cantidad de esfuerzo que necesitara para
+          entregarlas completas al cliente.
+        </h4>
+      </template>
+    </StoryList> -->
   </div>
 </template>
 
@@ -34,8 +51,8 @@ export default {
   },
   data() {
     return {
-      idJuego: this.$route.params.id,
-      idHistoria: this.$route.params.id2,
+      idJuego: this.$route.params.gameId,
+      idHistoria: this.$route.params.groupId,
       stories: [],
 
       received_messages: [],
@@ -95,8 +112,8 @@ export default {
               this.$router.push({
                 name: 'Estimation',
                 params: {
-                  gameId: this.$route.params.id,
-                  groupId: this.$route.params.id2,
+                  gameId: this.$route.params.gameId,
+                  groupId: this.$route.params.groupId,
                   storyId: payload.storyId
                   }
               });
@@ -125,10 +142,14 @@ export default {
 
   created() {
     this.send_message = this.$store.state.currentUser.name;
-    axios.get("/games/" + this.idJuego + "/stories/").then((res) => {
-      console.log(this.idJuego + "hay algo?");
-      this.stories = res.data;
-    });
+    // axios.get("/games/" + this.idJuego + "/stories/").then((res) => {
+    //   console.log(this.idJuego + "hay algo?");
+    //   this.stories = res.data;
+    // });
+    axios
+    .get("/games/" + this.$route.params.gameId + "/stories/group/" + this.$route.params.groupId)
+    .then(res => this.stories = res.data)
+
     this.connect();
     console.log("Apparently I am now connected!");
   },

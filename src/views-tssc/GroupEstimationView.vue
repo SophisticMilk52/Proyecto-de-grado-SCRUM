@@ -115,8 +115,8 @@ export default {
       + "/group/" + this.$store.state.currentUser.tsscGroup.id
 
       axios.put(route, json).then(
-        this.$router.push({name: 'Backlog', params: {id: this.$route.params.gameId,
-            id2: this.$store.state.currentUser.tsscGroup.id }})
+        this.$router.push({name: 'Backlog', params: {gameId: this.$route.params.gameId,
+            groupId: this.$store.state.currentUser.tsscGroup.id }})
       )
 
     },

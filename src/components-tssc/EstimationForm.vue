@@ -58,16 +58,15 @@
     </form>
 
     <div class="text-center">
-        <h4>¿Desea guardar esta estimación?</h4>
-        <base-button v-if="type!='group'" class="animation-on-hover" type="success" v-on:click="$emit('cancel')">
-          Cancelar
-        </base-button>
-        <base-button
-          type="success" class="animation-on-hover" v-bind:disabled="dis" value
-          v-on:click="$emit('post', {points, newCriteria, newTasks})">
-          Confirmar
-        </base-button>
-      </div>
+      <h4>¿Desea guardar esta estimación?</h4>
+      <base-button v-if="type!='group'" class="animation-on-hover" type="success" v-on:click="$emit('cancel')">
+        Cancelar
+      </base-button>
+      <base-button type="success" class="animation-on-hover" v-bind:disabled="dis" value
+      v-on:click="$emit('post', {points, newCriteria, newTasks})">
+        Confirmar
+      </base-button>
+    </div>
   </div>
 
 </div>
@@ -79,24 +78,59 @@ export default {
   props: {
     story: {
       type: Object
-      },
+    },
     criteria: {
       type: Array
     },
     estimation: {
       type: Object
     },
+    oldPoints: {
+      type: String,
+      default: ""
+    },
+    oldCriteria: {
+      type: String,
+      default: ""
+    },
+    oldTasks: {
+      type: String,
+      default: ""
+    },
     type: {
       type: String
     },
+  },
+  created() {
+    console.log("FORM CREATE")
+    console.log("Form Level - Estimation", this.estimation)
+    // console.log("Shit started")
+    // console.log(this.estimation)
+    // console.log(this.estimation.stvalue)
+    // if(this.estimation != undefined && this.estimation !=null){
+    //   this.change(this.estimation.stvalue)
+    // console.log(this.points)
+    //   if(this.estimation.criteria!=null) this.newCriteria = this.estimation.criteria
+    // // console.log(this.newCriteria)
+    //   if(this.estimation.tasks!=null) this.newTasks = this.estimation.tasks
+    // }
+
+    // if(this.type == "reestimation"){
+    //   this.change(this.oldPoints)
+    //   this.newCriteria = this.oldCriteria
+    //   this.newTasks = this.oldTasks
+    // }
+
+    if(this.points != "") dis == true
+
   },
   data() {
     return {
       buttons: [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, "Inf."],
       dis: true,
-      points: "",
-      newCriteria: "",
-      newTasks: "",
+      points: this.oldPoints,
+      newCriteria: this.oldCriteria,
+      newTasks: this.oldTasks,
       estimationCriteriaPH: "Escriba las tareas que considera son necesarias para completar esta historia.",
       estimationTaskPH: "Escriba los criterios faltantes que considera son necesarias para completar esta historia.",
       groupCriteriaPH: "Separe cada nuevo criterio con punto y coma (;)",
@@ -112,18 +146,7 @@ export default {
       this.dis = false;
     },
   },
-beforeCreate() {
-    console.log("Shit started")
-    console.log(this.estimation)
-    console.log(this.estimation.stvalue)
-    if(this.estimation != undefined && this.estimation !=null){
-      this.change(this.estimation.stvalue)
-    console.log(this.points)
-      if(this.estimation.criteria!=null) this.newCriteria = this.estimation.criteria
-    // console.log(this.newCriteria)
-      if(this.estimation.tasks!=null) this.newTasks = this.estimation.tasks
-    }
-  }
+
 
 
 }
