@@ -12,8 +12,8 @@
       <tbody>
         <tr :key="g.id" v-for="g in groups">
           <td>{{g.id}}</td>
-          <td>{{LOCAL_URL}}games/{{gameId}}/groups/{{g.id}}/login/{{g.qrPassword}}</td>
-          <!-- <td>{{REMOTE_URL}}games/{{gameId}}/groups/{{g.id}}/login/{{g.qrPassword}}</td> -->
+          <!-- <td>{{LOCAL_URL}}games/{{gameId}}/groups/{{g.id}}/login/{{g.qrPassword}}</td> -->
+          <td>{{REMOTE_URL}}games/{{gameId}}/groups/{{g.id}}/login/{{g.qrPassword}}</td>
         </tr>
       </tbody>
     </table>
