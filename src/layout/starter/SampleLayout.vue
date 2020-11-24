@@ -2,13 +2,20 @@
   <div class="wrapper">
     <side-bar>
       <template slot="links">
-        <sidebar-link :to="backlogRoute" :name="$t('Estimacion')" icon="tim-icons icon-minimal-right" />
+        <!-- <sidebar-link :to="backlogRoute" :name="$t('Estimacion')" icon="tim-icons icon-minimal-right" /> -->
+        <sidebar-link :to="{ name: 'Backlog' }" :name="$t('Backlog')" icon="tim-icons icon-bullet-list-67" />
+        <sidebar-link :to="{ name: 'Sprint Backlog' }" :name="$t('Sprint Backlog')" icon="tim-icons icon-notes" />
+        <sidebar-link :to="{ name: 'Development' }" :name="$t('Desarrollo')" icon="tim-icons icon-delivery-fast" />
+        <sidebar-link :to="{ name: 'Retrospective' }" :name="$t('Retrospectiva')" icon="tim-icons icon-check-2" />
         <!-- <sidebar-link to="/games" :name="$t('Estimacion')" icon="tim-icons icon-minimal-right" /> -->
         <!-- <sidebar-link to="/proceso" :name="$t('Sprint Backlog')" icon="tim-icons icon-minimal-right" /> -->
-        <sidebar-link :to="bbroute" :name="$t('Sprint Backlog')" icon="tim-icons icon-minimal-right" />
+
+
+
+        <!-- <sidebar-link :to="bbroute" :name="$t('Sprint Backlog')" icon="tim-icons icon-minimal-right" /> -->
         <!-- <sidebar-link :to="{ name: 'SprintBacklogView', params: { gameId: this.$route.params.gameId, groupId: this.$route.params.groupId }}" :name="$t('Sprint Shit')" icon="tim-icons icon-minimal-right" /> -->
-        <sidebar-link to="/proceso" :name="$t('Desarrollo')" icon="tim-icons icon-minimal-right" />
-        <sidebar-link to="/proceso" :name="$t('Retrospectiva')" icon="tim-icons icon-minimal-right" />
+        <!-- <sidebar-link to="/proceso" :name="$t('Desarrollo')" icon="tim-icons icon-minimal-right" />
+        <sidebar-link to="/proceso" :name="$t('Retrospectiva')" icon="tim-icons icon-minimal-right" /> -->
       </template>
     </side-bar>
     <div class="main-panel">

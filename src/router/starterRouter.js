@@ -1,15 +1,37 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+
+// PARENT VIEW
 import DashboardLayout from '../layout/starter/SampleLayout.vue';
+
+// CHILD VIEWS
+
 import ModeratorView from '../views-tssc/ModeratorView';
+import LoginView from '../views-tssc/LoginView';
 import BacklogView from '../views-tssc/BacklogView';
 import EstimationView from '../views-tssc/EstimationView';
 import ReestimationView from '../views-tssc/ReestimationView';
 import GroupEstimationView from '../views-tssc/GroupEstimationView';
 import SprintBacklogView from '../views-tssc/SprintBacklogView';
+import DevelopmentView from '../views-tssc/DevelopmentView';
 import RetrospectiveView from '../views-tssc/RetrospectiveView';
-import LoginView from '../views-tssc/LoginView';
+import RetrospectiveDetailView from '../views-tssc/RetrospectiveDetailView';
 import UnauthView from '../views-tssc/UnauthView';
+import store from '../plugins/store';
+
+// SHORT PATH VERSION
+// import ModeratorView from '../pages-tssc/Moderator';
+// import LoginView from '../pages-tssc/Login';
+// import RegisterView from '../pages-tssc/Register';
+// import Backlog from '../pages-tssc/Backlog';
+// import EstimationView from '../pages-tssc/Estimation';
+// import store from '../store/index';
+
+
+
+
+
+// TO DELETE
 import Starter from '../layout/starter/SamplePage.vue';
 import Historias from '../layout/starter/Historias.vue';
 import ProcesoSrcum from '../layout/starter/modulo2/ProcesoSrcum.vue';
@@ -19,11 +41,11 @@ import Detalles from '../layout/starter/modulo2/Detalles.vue';
 import Estimacion from '../layout/starter/Estimacion.vue';
 import Cronometro from '../layout/starter/Cronometro.vue';
 import Grupo from '../layout/starter/Grupo.vue';
-// import Resultados from '../layout/starter/Resultados.vue';
 import Message from '../layout/starter/Message.vue';
 import Games from '../layout/starter/Games.vue';
 import Estimation from '../layout/starter/Estimation/Estimation.vue';
-import store from '../plugins/store';
+
+// import store from '../plugins/store';
 Vue.use(Router);
 
 let router = new Router({
@@ -40,6 +62,16 @@ let router = new Router({
           name: 'Ingreso Participante',
           components: { default: LoginView }
         },
+        // {
+        //   path: 'games/:gameId/groups/:groupId/register/:qr',
+        //   name: 'register',
+        //   components: { default: RegisterView }
+        // },
+        // {
+        //   path: 'games/:gameId/groups/:groupId/login/:qr',
+        //   name: 'login',
+        //   components: { default: LoginView }
+        // },
         {
           // TODO Delete or replace with Home View.
           path: 'games',
@@ -57,7 +89,6 @@ let router = new Router({
           component: UnauthView
         },
         {
-          // path: 'games/:id/groups/:id2/backlog',
           path: 'games/:gameId/groups/:groupId/backlog',
           name: 'Backlog',
           components: { default: BacklogView },
@@ -65,6 +96,14 @@ let router = new Router({
             requiresAuth: true
           }
         },
+        // {
+        //   path: 'backlog',
+        //   name: 'backlog',
+        //   components: { default: Backlog },
+        //   meta: {
+        //     requiresAuth: true
+        //   }
+        // },
         {
           // path: 'games/:id/groups/:id2/backlog',
           path: 'games/:gameId/groups/:groupId/sprint/new',
@@ -77,14 +116,33 @@ let router = new Router({
         {
           // path: 'games/:id/groups/:id2/backlog',
           path: 'games/:gameId/groups/:groupId/sprint/:sprintId',
-          name: 'Retrospective',
-          components: { default: RetrospectiveView },
+          name: 'Development',
+          components: { default: DevelopmentView },
           meta: {
-            requiresAuth: true
+            // requiresAuth: true
           }
         },
         {
-          path: 'games/:gameId/groups/:groupId/stories/:storyId/estimations/add',
+          // path: 'games/:id/groups/:id2/backlog',
+          path: 'games/:gameId/groups/:groupId/sprint/:sprintId/retrospective',
+          name: 'Retrospective',
+          components: { default: RetrospectiveView },
+          meta: {
+            // requiresAuth: true
+          }
+        },
+        {
+          // path: 'games/:id/groups/:id2/backlog',
+          path: 'games/:gameId/groups/:groupId/sprint/:sprintId/stories/:storyId',
+          name: 'Retrospective Detail',
+          components: { default: RetrospectiveDetailView },
+          meta: {
+            // requiresAuth: true
+          }
+        },
+        {
+          // path: 'games/:gameId/groups/:groupId/stories/:storyId/estimations/add',
+          path: 'backlog/stories/:storyId/estimations/add',
           name: 'Estimation',
           components: { default: EstimationView },
           meta: {
@@ -183,20 +241,28 @@ let router = new Router({
     //   name: 'Moderator View',
     //   component: ModeratorView
     // },
-  ]
-
-})
-
-router.beforeEach((to, from, next) => {
-  if(to.matched.some(record => record.meta.requiresAuth)){
-    if(store.getters.isLoggedIn){
-      next()
-      return
+  ],
+  linkExactActiveClass: "active",
+  scrollBehavior: to => {
+    if(to.hash) {
+      return {selector: to.hash}
+    } else {
+      return {x: 0, y: 0}
     }
-    next("/unauth")
-  } else {
-    next()
   }
+
 })
+
+// router.beforeEach((to, from, next) => {
+//   if(to.matched.some(record => record.meta.requiresAuth)){
+//     if(store.getters.isLoggedIn){
+//       next()
+//       return
+//     }
+//     next("/unauth")
+//   } else {
+//     next()
+//   }
+// })
 
 export default router;

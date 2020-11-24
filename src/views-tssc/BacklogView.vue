@@ -13,14 +13,15 @@
         </tr>
       </table>
     </div> -->
-    <StoryList type="estimation" :stories="stories" v-on:select="selectStory">
+    <StoryList type="backlog" :stories="stories" v-on:select="selectStory">
       <template v-slot:header>
         <h1 class="text-center"><strong>Backlog</strong></h1>
       </template>
       <template v-slot:description>
         <h4 class="text-center">
           Seleccione historias y estime en puntos la cantidad de esfuerzo que necesitara para
-          entregarlas completas al cliente.
+          entregarlas completas al cliente. Además, adicione criterios de aceptación y tareas que
+          crea que falten.
         </h4>
       </template>
     </StoryList>

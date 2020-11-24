@@ -1,7 +1,7 @@
 <template>
 
 <div>
-    <h1 class="text-center"><strong>Enlaces</strong></h1>
+    <h2 class="text-center"><strong>Enlaces</strong></h2>
     <table class="table">
       <thead>
         <tr class="table-head">

@@ -1,7 +1,7 @@
 <template>
 <div>
   <base-button class="btn" type="secondary" @click='refresh'>Refresh</base-button>
-  <h1 class="text-center"><strong>Participantes</strong></h1>
+  <h2 class="text-center"><strong>Participantes</strong></h2>
     <table class="table">
       <thead class="table-head">
         <tr>
