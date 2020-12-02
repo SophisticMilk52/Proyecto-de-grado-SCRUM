@@ -4,6 +4,7 @@ import Router from 'vue-router';
 // PARENT VIEW
 import DashboardLayout from '../layout/starter/SampleLayout.vue';
 
+import Backlog from '../pages-tssc/Backlog';
 // CHILD VIEWS
 
 import ModeratorView from '../views-tssc/ModeratorView';
@@ -62,6 +63,7 @@ let router = new Router({
           name: 'Ingreso Participante',
           components: { default: LoginView }
         },
+
         // {
         //   path: 'games/:gameId/groups/:groupId/register/:qr',
         //   name: 'register',
@@ -78,20 +80,60 @@ let router = new Router({
           name: 'Juegos',
           components: { default: Starter }
         },
+
         {
           path: 'games/:gameId/moderator/:modPwd',
           name: 'Moderator View',
           component: ModeratorView
         },
+
         {
           path: 'unauth',
           name: 'Not Logged In',
           component: UnauthView
         },
+
         {
           path: 'games/:gameId/groups/:groupId/backlog',
           name: 'Backlog',
-          components: { default: BacklogView },
+          // components: { default: BacklogView },
+          components: { default: Backlog },
+          children: [
+            {
+              path: '',
+              name: 'Backlog',
+              component: BacklogView
+            },
+
+            {
+              // path: 'games/:gameId/groups/:groupId/stories/:storyId/estimations/add',
+              path: 'stories/:storyId/estimations/add',
+              name: 'Estimation',
+              components: { default: EstimationView },
+              // meta: {
+              //   requiresAuth: true
+              // }
+            },
+
+            {
+              path: 'stories/:storyId/estimations/:estimationId',
+              name: 'Reestimation',
+              components: { default: ReestimationView },
+              // meta: {
+              //   requiresAuth: true
+              // }
+            },
+
+            {
+              path: 'stories/:storyId/estimations',
+              name: 'GroupEstimation',
+              components: { default: GroupEstimationView },
+              // meta: {
+              //   requiresAuth: true
+              // }
+            },
+
+          ],
           meta: {
             requiresAuth: true
           }
@@ -115,7 +157,7 @@ let router = new Router({
         },
         {
           // path: 'games/:id/groups/:id2/backlog',
-          path: 'games/:gameId/groups/:groupId/sprint/:sprintId',
+          path: 'games/:gameId/groups/:groupId/sprint/active',
           name: 'Development',
           components: { default: DevelopmentView },
           meta: {
@@ -124,7 +166,8 @@ let router = new Router({
         },
         {
           // path: 'games/:id/groups/:id2/backlog',
-          path: 'games/:gameId/groups/:groupId/sprint/:sprintId/retrospective',
+          // path: 'games/:gameId/groups/:groupId/sprint/:sprintId/retrospective',
+          path: 'games/:gameId/groups/:groupId/sprint/active/retrospective',
           name: 'Retrospective',
           components: { default: RetrospectiveView },
           meta: {
@@ -133,38 +176,38 @@ let router = new Router({
         },
         {
           // path: 'games/:id/groups/:id2/backlog',
-          path: 'games/:gameId/groups/:groupId/sprint/:sprintId/stories/:storyId',
+          path: 'games/:gameId/groups/:groupId/sprint/active/stories/:storyId',
           name: 'Retrospective Detail',
           components: { default: RetrospectiveDetailView },
           meta: {
             // requiresAuth: true
           }
         },
-        {
-          // path: 'games/:gameId/groups/:groupId/stories/:storyId/estimations/add',
-          path: 'backlog/stories/:storyId/estimations/add',
-          name: 'Estimation',
-          components: { default: EstimationView },
-          meta: {
-            requiresAuth: true
-          }
-        },
-        {
-          path: 'games/:gameId/groups/:groupId/stories/:storyId/estimations/:estimationId',
-          name: 'Reestimation',
-          components: { default: ReestimationView },
-          meta: {
-            requiresAuth: true
-          }
-        },
-        {
-          path: 'games/:gameId/stories/:storyId/estimations',
-          name: 'GroupEstimation',
-          components: { default: GroupEstimationView },
-          meta: {
-            requiresAuth: true
-          }
-        },
+        // {
+        //   // path: 'games/:gameId/groups/:groupId/stories/:storyId/estimations/add',
+        //   path: 'games/:gameId/groups/:groupId/backlog/stories/:storyId/estimations/add',
+        //   name: 'Estimation',
+        //   components: { default: EstimationView },
+        //   meta: {
+        //     requiresAuth: true
+        //   }
+        // },
+        // {
+        //   path: 'games/:gameId/groups/:groupId/backlog/stories/:storyId/estimations/:estimationId',
+        //   name: 'Reestimation',
+        //   components: { default: ReestimationView },
+        //   meta: {
+        //     requiresAuth: true
+        //   }
+        // },
+        // {
+        //   path: 'games/:gameId/groups/:groupId/backlog/stories/:storyId/estimations',
+        //   name: 'GroupEstimation',
+        //   components: { default: GroupEstimationView },
+        //   meta: {
+        //     requiresAuth: true
+        //   }
+        // },
 
         {
           path: 'proceso',
@@ -253,16 +296,16 @@ let router = new Router({
 
 })
 
-// router.beforeEach((to, from, next) => {
-//   if(to.matched.some(record => record.meta.requiresAuth)){
-//     if(store.getters.isLoggedIn){
-//       next()
-//       return
-//     }
-//     next("/unauth")
-//   } else {
-//     next()
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)){
+    if(store.getters.isLoggedIn){
+      next()
+      return
+    }
+    next("/unauth")
+  } else {
+    next()
+  }
+})
 
 export default router;

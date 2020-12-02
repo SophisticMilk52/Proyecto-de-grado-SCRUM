@@ -46,6 +46,7 @@ import SockJS from "sockjs-client";
 import Stomp from "webstomp-client";
 import Modal from "../components/Modal";
 import StoryList from "../components-tssc/StoryList";
+import Constant from "../constant";
 export default {
   components: {
     Modal, StoryList
@@ -93,7 +94,11 @@ export default {
     // Only thing that occurs to me for this one is find a way to place these components on an macro component, and have the inner components
     // trigger its methods whenever necessary.
     connect() {
-      this.socket = new SockJS("http://localhost:8090/agile-websocket");
+      let url = "http://localhost:8090/scrum/agile-websocket"
+      if(Constant.BASE_URL == "https://pi2sis.icesi.edu.co/scrum/api/"){
+        url = "https://pi2sis.icesi.edu.co/scrum/agile-websocket"
+      }
+      this.socket = new SockJS(url);
       this.stompClient = Stomp.over(this.socket);
       this.stompClient.connect(
         {},

@@ -34,13 +34,13 @@ export default {
   components: {
     StoryList
   },
-  props: {
-    // change this to data
-    stories: {
-      type: Array,
-      default: []
-    }
-  },
+  // props: {
+  //   // change this to data
+  //   stories: {
+  //     type: Array,
+  //     default: []
+  //   }
+  // },
   created(){
     axios
     .get("/games/" + this.$route.params.gameId + "/stories/group/" + this.$route.params.groupId)
@@ -48,7 +48,8 @@ export default {
   },
   data(){
     return {
-      checkedStories: []
+      checkedStories: [],
+      stories: []
     }
   },
   methods: {

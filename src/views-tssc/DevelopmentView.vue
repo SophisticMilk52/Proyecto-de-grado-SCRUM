@@ -1,5 +1,7 @@
 <template>
-<div>
+<div v-if="ready==0">Loading...</div>
+<div v-else-if="ready==-1"><h1>En este momento no su grupo no ha iniciado un Sprint. Ingrese a SPRINT BACKLOG para hacer eso.</h1></div>
+<div v-else>
   <StoryList type="develop" :stories="stories" v-on:select="showStory">
     <template v-slot:header>
       <h1 class="text-center"><strong>Desarrollo</strong></h1>
@@ -59,12 +61,18 @@
 import axios from '../plugins/axios'
 import Modal from '../components/Modal'
 import StoryList from "../components-tssc/StoryList";
+
 export default {
   components: {
     Modal, StoryList
   },
+
+  /**
+   * Development View's data
+   */
   data(){
     return {
+      ready: 0,
       selectedStory: {
         description: "",
         shortDescription: "",
@@ -79,15 +87,32 @@ export default {
     }
   },
 
+  /**
+   * @todo Add
+   */
   created(){
     console.log("started")
+    // Add portion where if null object returns, show that there's no active sprint atm
     axios
-    .get("/games/" + this.$route.params.gameId + "/stories/group/" + this.$route.params.groupId
-    + "/sprint/" + this.$route.params.sprintId)
+    .get("/games/" + this.$route.params.gameId + "/sprints/group/" + this.$route.params.groupId
+    + "/active/")
     .then(
       res => {
-        console.log(res.data)
-        this.stories = res.data
+        if(res.data){
+          console.log(res.data)
+          let sprintId = res.data.id
+          console.log(sprintId)
+          axios
+          .get("/games/" + this.$route.params.gameId + "/stories/group/" + this.$route.params.groupId
+          + "/sprint/" + sprintId)
+          .then(
+            res2 => this.stories = res2.data
+          )
+          this.ready = 1
+        }else {
+          console.log("logic successful")
+          this.ready = -1
+        }
       }
     )
   },

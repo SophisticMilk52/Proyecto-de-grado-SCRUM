@@ -167,15 +167,41 @@ export default {
           doneEstimation: this.doneEstimation
         }
 
-        axios
-        .put("/games/" + this.$route.params.gameId + "/stories/" + this.$route.params.storyId +
-        "/adjusted/",
-        json)
-        .then(
-          (res) => {
-            this.$router.push({name: "Retrospective"})
+        // Warning if criteria or tasks are incomplete
+        // let count = criteria.
+        let crit = this.criteria.reduce((count,item)=>count+(item.tsscState.id==1),0)
+        let tsks = this.tasks.reduce((count,item)=>count+(item.tsscState.id==1),0)
+
+        console.log(crit,",",tsks)
+        console.log(this.criteria)
+
+        if((crit > 0 || tsks>0) && Number(this.adjustedEstimation) == Number(this.doneEstimation)){
+          if(confirm("ADVERTENCIA.\nEsta historia tiene " + crit + " criterios de aceptación sin aceptar y "
+          + tsks + " tareas sin terminar. Si los puntos ajustados y lo que hizo son iguales, esta diciendo "
+          + "que ya acepto y termino estos, y al cerrar Sprint no volvera la historia al Backlog.\n¿Desea continuar?")){
+            axios
+            .put("/games/" + this.$route.params.gameId + "/stories/" + this.$route.params.storyId +
+            "/adjusted/",
+            json)
+            .then(
+              (res) => {
+                this.$router.push({name: "Retrospective"})
+              }
+            )
+          } else {
+
           }
-        )
+        } else {
+          axios
+          .put("/games/" + this.$route.params.gameId + "/stories/" + this.$route.params.storyId +
+          "/adjusted/",
+          json)
+          .then(
+            (res) => {
+              this.$router.push({name: "Retrospective"})
+            }
+          )
+        }
       }
     },
 
