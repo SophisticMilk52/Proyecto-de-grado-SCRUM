@@ -13,14 +13,15 @@
         </tr>
       </table>
     </div> -->
-    <StoryList type="estimation" :stories="stories" v-on:select="selectStory">
+    <StoryList type="backlog" :stories="stories" v-on:select="selectStory">
       <template v-slot:header>
         <h1 class="text-center"><strong>Backlog</strong></h1>
       </template>
       <template v-slot:description>
         <h4 class="text-center">
           Seleccione historias y estime en puntos la cantidad de esfuerzo que necesitara para
-          entregarlas completas al cliente.
+          entregarlas completas al cliente. Además, adicione criterios de aceptación y tareas que
+          crea que falten.
         </h4>
       </template>
     </StoryList>
@@ -45,6 +46,7 @@ import SockJS from "sockjs-client";
 import Stomp from "webstomp-client";
 import Modal from "../components/Modal";
 import StoryList from "../components-tssc/StoryList";
+import Constant from "../constant";
 export default {
   components: {
     Modal, StoryList
@@ -92,7 +94,11 @@ export default {
     // Only thing that occurs to me for this one is find a way to place these components on an macro component, and have the inner components
     // trigger its methods whenever necessary.
     connect() {
-      this.socket = new SockJS("http://localhost:8090/agile-websocket");
+      let url = "http://localhost:8090/scrum/agile-websocket"
+      if(Constant.BASE_URL == "https://pi2sis.icesi.edu.co/scrum/api/"){
+        url = "https://pi2sis.icesi.edu.co/scrum/agile-websocket"
+      }
+      this.socket = new SockJS(url);
       this.stompClient = Stomp.over(this.socket);
       this.stompClient.connect(
         {},

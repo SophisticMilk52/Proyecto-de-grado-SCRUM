@@ -11,13 +11,24 @@
 
     <br />
 
-    <h2>Criterios de Aceptación:</h2>
+    <div>
+      <h2>Criterios de Aceptación:</h2>
 
-    <ul>
-      <li :key="c.id" v-for="c in criteria">
-        <h4>{{c.description}}</h4>
-      </li>
-    </ul>
+      <ul>
+        <li :key="c.id" v-for="c in criteria">
+          <h4>{{c.description}}</h4>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h2>Tareas:</h2>
+      <ul>
+        <li :key="t.id" v-for="t in tasks">
+          <h4>{{t.description}}</h4>
+        </li>
+      </ul>
+    </div>
 
   </div>
   <div>
@@ -26,7 +37,7 @@
     </h3>
   </div>
   <div class="elementos container">
-    <div class="row">
+    <div class="blockquote mb-0 row">
       <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 my-btn" :key="b"
       v-for="b in buttons">
         <base-button class="animation-on-hover" type="info" @click="change(b)">
@@ -80,6 +91,9 @@ export default {
       type: Object
     },
     criteria: {
+      type: Array
+    },
+    tasks: {
       type: Array
     },
     estimation: {

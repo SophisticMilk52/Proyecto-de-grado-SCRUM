@@ -1,7 +1,7 @@
 <template>
 <div>
-  <EstimationForm type="estimation" :story="story" :criteria="criteria" v-on:post="postEstimation"
-  v-on:cancel="cancel"/>
+  <EstimationForm type="estimation" :story="story" :criteria="criteria" :tasks="tasks"
+  v-on:post="postEstimation" v-on:cancel="cancel"/>
 </div>
 </template>
 <script>
@@ -18,20 +18,24 @@ export default {
       "/stories/" +
       this.$route.params.storyId;
     axios
-      .get(
-        "/games/" +
-          this.$route.params.gameId +
-          "/stories/" +
-          this.$route.params.storyId
-      )
-      .then((res) => {
+    .get("/games/" + this.$route.params.gameId + "/stories/" + this.$route.params.storyId)
+    .then(
+      (res) => {
         this.story = res.data;
-        console.log(this.story)
-      });
-    axios.get(route + "/accriteria/").then((res) => {
-      console.log(res.data);
-      this.criteria = res.data;
-      console.log(this.criteria);
+        axios
+        .get(route + "/accriteria/")
+        .then(
+          (res2) => {
+            this.criteria = res2.data;
+            console.log(this.criteria);
+        });
+        axios
+        .get(route + "/tasks/")
+        .then(
+          (res3) => {
+            this.tasks = res3.data;
+            console.log(this.criteria);
+        });
     });
 
     // Apply props if needed
@@ -67,6 +71,7 @@ export default {
       dis: true,
       story: {},
       criteria: [],
+      tasks: [],
       criteriaComment: "",
       taskComment: "",
     };

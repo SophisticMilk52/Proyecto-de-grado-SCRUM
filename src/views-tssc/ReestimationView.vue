@@ -1,6 +1,6 @@
 <template>
 <div>
-  <EstimationForm :key="estimation.id" type="estimation" :estimation="estimation" :story="story" :criteria="criteria"
+  <EstimationForm :key="estimation.id" type="estimation" :estimation="estimation" :story="story" :criteria="criteria" :tasks="tasks"
   :oldPoints="estimation.stvalue" :oldCriteria="estimation.criteria" :oldTasks="estimation.tasks"
   v-on:post="postEstimation" v-on:cancel="cancel"/>
 </div>
@@ -20,19 +20,24 @@ export default {
       "/stories/" +
       this.$route.params.storyId;
     axios
-      .get(
-        "/games/" +
-          this.$route.params.gameId +
-          "/stories/" +
-          this.$route.params.storyId
-      )
-      .then((res) => {
+    .get("/games/" + this.$route.params.gameId + "/stories/" + this.$route.params.storyId)
+    .then(
+      (res) => {
         this.story = res.data;
-        console.log("Story", this.story)
-      });
-    axios.get(route + "/accriteria/").then((res) => {
-      this.criteria = res.data;
-      console.log("Criteria", this.criteria);
+        axios
+        .get(route + "/accriteria/")
+        .then(
+          (res2) => {
+            this.criteria = res2.data;
+            console.log(this.criteria);
+        });
+        axios
+        .get(route + "/tasks/")
+        .then(
+          (res3) => {
+            this.tasks = res3.data;
+            console.log(this.criteria);
+        });
     });
 
     axios.get("/games/" + this.$route.params.gameId + "/groups/" + this.$route.params.groupId
@@ -77,6 +82,7 @@ export default {
       story: {},
       estimation: {},
       criteria: [],
+      tasks: [],
       criteriaComment: "",
       taskComment: "",
     };

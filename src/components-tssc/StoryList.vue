@@ -1,5 +1,6 @@
 <template>
 <div>
+  <!--  TODO: ORGANIZE TABLES BETTER ACCORDING TO TYPE PROP -->
   <!-- <h1>{{checkedStories}}</h1> -->
   <header>
     <slot name="header">
@@ -12,26 +13,52 @@
     </slot>
   </header>
 
-  <table class="table">
+<!-- Tables -->
+
+  <table class="table" v-if="type=='moderator'">
     <thead>
       <tr>
         <th class="text-center priority">Prioridad</th>
-        <th class="story-title">Título</th>
-        <th v-if="type!='moderator'" class="text-right points">Puntos</th>
+        <th class="story-title">Descripcion</th>
         <th class="text-center">Información</th>
-        <th v-if="type=='estimation'" class="text-center">Estimar</th>
-        <th v-if="type=='sprint-backlog'" class="text-center">Incluir en el Sprint</th>
+      </tr>
+    </thead>
+     <tbody>
+      <tr :key="s.id" v-for="s in stories">
+        <td class="text-center">
+          {{s.priority}}
+        </td>
+        <td>
+          {{s.shortDescription}}
+        </td>
+        <td class="text-center">
+          <base-button class="btn" size="sm" type="secondary" v-on:click="detailStory(s)">
+            Más Información
+          </base-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table" v-if="type=='backlog'">
+    <thead>
+      <tr>
+        <th class="text-center priority">Prioridad</th>
+        <th class="story-title">Descripcion</th>
+        <th class="text-right points">Puntos</th>
+        <th class="text-center">Información</th>
+        <th class="text-center">Estimar</th>
       </tr>
     </thead>
     <tbody>
       <tr :key="s.id" v-for="s in stories">
         <td class="text-center">
-          3
+          {{s.priority}}
         </td>
         <td>
           {{s.shortDescription}}
         </td>
-        <td class="text-right" v-if="type!='moderator'">
+        <td class="text-right">
           {{s.initialEstimation ? s.initialEstimation : "N.A."}}
         </td>
         <td class="text-center">
@@ -39,25 +66,149 @@
             Más Información
           </base-button>
         </td>
-        <td class="text-center" v-if="type=='estimation'">
+        <td class="text-center">
           <base-button class="btn" size="sm" type="secondary" v-on:click="$emit('select', s)">
             Estimar
           </base-button>
         </td>
-        <td class="text-center" v-if="type=='sprint-backlog'">
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table" v-if="type=='develop'">
+    <thead>
+      <tr>
+        <th class="text-center priority">Prioridad</th>
+        <th class="story-title">Descripcion</th>
+        <th class="text-right points">Puntos</th>
+        <th class="text-center">Información</th>
+        <th class="text-center">Criterios/Tareas</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr :key="s.id" v-for="s in stories">
+        <td class="text-center">
+          {{s.priority}}
+        </td>
+        <td>
+          {{s.shortDescription}}
+        </td>
+        <td class="text-right">
+          {{s.initialEstimation ? s.initialEstimation : "N.A."}}
+        </td>
+        <td class="text-center">
+          <base-button class="btn" size="sm" type="secondary" v-on:click="detailStory(s)">
+            Más Información
+          </base-button>
+        </td>
+        <td class="text-center">
+          <base-button class="btn" size="sm" type="secondary" v-on:click="$emit('select', s)">
+            Modificar
+          </base-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table" v-if="type=='sprint-backlog'">
+    <thead>
+      <tr>
+        <th class="text-center priority">Prioridad</th>
+        <th class="story-title">Descripcion</th>
+        <th class="text-right points">Puntos</th>
+        <th class="text-center">Información</th>
+        <th class="text-center">Incluir en el Sprint</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr :key="s.id" v-for="s in stories">
+        <td class="text-center">
+          {{s.priority}}
+        </td>
+        <td>
+          {{s.shortDescription}}
+        </td>
+        <td class="text-right">
+          {{s.initialEstimation ? s.initialEstimation : "N.A."}}
+        </td>
+        <td class="text-center">
+          <base-button class="btn" size="sm" type="secondary" v-on:click="detailStory(s)">
+            Más Información
+          </base-button>
+        </td>
+        <td class="text-center">
           <input type="checkbox" :id="s.id" :value="s.id" v-model="checkedStories">
         </td>
       </tr>
     </tbody>
-    <tr v-if="type=='sprint-backlog'">
+    <tr>
       <td colspan="2">
-        Total:
+        <strong>Total:</strong>
       </td>
       <td class="text-right">
-        {{pointSum}}
+        <strong>{{pointSum}}</strong>
       </td>
       <td colspan="2"></td>
     </tr>
+  </table>
+
+  <table class="table" v-if="type=='retrospective'">
+    <thead>
+      <tr>
+        <th class="text-center priority">Prioridad</th>
+        <th class="story-title">Descripcion</th>
+        <th class="text-right points">Puntos</th>
+        <th class="text-right points">Estimación Ajustada</th>
+        <th class="text-right points">Puntos Realizados</th>
+        <th class="text-center">Información</th>
+        <th class="text-center">Retrospectiva</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr :key="s.id" v-for="s in stories">
+        <td class="text-center">
+          {{s.priority}}
+        </td>
+        <td>
+          {{s.shortDescription}}
+        </td>
+        <td class="text-right" v-if="type!='moderator'">
+          {{s.initialEstimation ? s.initialEstimation : "N.A."}}
+        </td>
+        <td class="text-right" v-if="type=='retrospective'">
+          {{s.adjustedEstimation ? s.adjustedEstimation : "N.A."}}
+        </td>
+        <td class="text-right" v-if="type=='retrospective'">
+          {{s.doneEstimation ? s.doneEstimation : "N.A."}}
+        </td>
+        <td class="text-center">
+          <base-button class="btn" size="sm" type="secondary" v-on:click="detailStory(s)">
+            Ver Historia
+          </base-button>
+        </td>
+        <td class="text-center">
+          <base-button class="btn" size="sm" type="secondary" v-on:click="$emit('select', s)">
+            Puntuar
+          </base-button>
+        </td>
+      </tr>
+
+
+    <tr>
+      <td colspan="2">
+        <strong>Velocidad Acumulada</strong>
+      </td>
+      <td class="text-right">
+        {{ expectedSpeed }}
+      </td>
+      <td class="text-right">
+        {{ adjustedSpeed }}
+      </td>
+      <td class="text-right">
+        {{ doneSpeed }}
+      </td>
+    </tr>
+    </tbody>
   </table>
 
   <div class="text-center" v-if="type=='sprint-backlog'">
@@ -79,16 +230,24 @@
       <h4>Criterios de aceptación</h4>
         <ul v-if="selectedStory.criteria.length > 0">
           <li :key="c.id" v-for="c in selectedStory.criteria">
-            {{c.description}}
+            <s v-if="c.tsscState.id==2">{{c.description}}</s>
+            <div v-else>{{c.description}}</div>
           </li>
         </ul>
-        <!-- <ul v-if="currentCriteria.length > 0">
-          <li :key="c.id" v-for="c in currentCriteria">
-            {{c.description}}
-          </li>
-        </ul> -->
         <p v-else>Esta historia no posee criterios de aceptacion. </p>
      </div>
+
+     <div class="container">
+      <h4>Tareas</h4>
+        <ul v-if="tasks.length > 0">
+          <li :key="c.id" v-for="c in tasks">
+            <s v-if="c.tsscState.id==2">{{c.description}}</s>
+            <div v-else>{{c.description}}</div>
+          </li>
+        </ul>
+        <p v-else>Esta historia no posee tareas. </p>
+     </div>
+
    </modal>
 </div>
 
@@ -101,12 +260,7 @@ export default {
   props: {
     type: {
       type: String
-    },
-    gameId: {
-      type: String
-    },
-    groupId: {
-      type: String
+      // moderator, backlog, sprint-backlog, retrospective
     },
     stories: {
       type: Array,
@@ -117,55 +271,48 @@ export default {
     Modal
   },
   created(){
-    // this.currentCriteria = []
-    // this.retrieveData();
+    console.log("route test",this.$route.params.groupId)
   },
+
   mounted(){
-    // axios
-    // .get("/games/" + this.gameId + "/stories/")
-    // .then(res => this.stories = res.data)
   },
+
   data(){
     return {
       selectedStory: {
         description: "",
         shortDescription: "",
-        criteria: []
+        criteria: [],
       },
-      // stories: this.storyList,
+      tasks: [],
+
       modals: {
         modal0: false
       },
-      // currentCriteria: [],
+
       checkedStories: []
     }
   },
-  methods: {
-    // retrieveData(){
-    //   if(this.type == "moderator"){
-    //     axios.get("/games/" + this.gameId + "/stories/")
-    //     .then(res => {
-    //       this.stories = res.data
-    //       console.log(this.stories)
-    //     })
-    //   } else {
-    //     axios.get("/games/" + this.gameId + "/stories/group/" + this.groupId)
-    //     .then(res => this.stories = res.data)
-    //   }
-    // },
 
+  methods: {
     detailStory(s){
       this.selectedStory = s;
-      // this.retrieveCriteria(s.id)
+      this.retrieveTasks(s.id)
       this.modals.modal0 = true
     },
-    // retrieveCriteria(id){
-    //   axios
-    //   // .get("/games/" + this.$route.params.id + "/stories/" + id + "/accriteria/")
-    //   .get("/games/" + this.gameId + "/stories/" + id + "/accriteria/")
-    //   .then(res => this.currentCriteria = res.data)
-    //   this.modals.modal0 = true
-    // }
+
+    retrieveTasks(id){
+      console.log("method in")
+      axios
+      .get("/games/" + this.$route.params.gameId + "/stories/" + id + "/tasks/")
+      .then(
+        (res) => {
+          console.log("answer in")
+          this.tasks = res.data
+        }
+      )
+    }
+
   },
 
   computed: {
@@ -184,7 +331,39 @@ export default {
         })
         return sum
       }
+    },
+
+    expectedSpeed(){
+      let sum = 0
+      this.stories.forEach(s => {
+        if(s.initialEstimation){
+          sum += Number(s.initialEstimation)
+        }
+      })
+      return sum
+
+    },
+
+    adjustedSpeed(){
+      let sum = 0
+      this.stories.forEach(s => {
+        if(s.adjustedEstimation){
+          sum += Number(s.adjustedEstimation)
+        }
+      })
+      return sum
+    },
+
+    doneSpeed(){
+      let sum = 0
+      this.stories.forEach(s => {
+        if(s.doneEstimation){
+          sum += Number(s.doneEstimation)
+        }
+      })
+      return sum
     }
+
   }
 
 }

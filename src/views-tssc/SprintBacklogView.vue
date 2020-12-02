@@ -34,12 +34,13 @@ export default {
   components: {
     StoryList
   },
-  props: {
-    stories: {
-      type: Array,
-      default: []
-    }
-  },
+  // props: {
+  //   // change this to data
+  //   stories: {
+  //     type: Array,
+  //     default: []
+  //   }
+  // },
   created(){
     axios
     .get("/games/" + this.$route.params.gameId + "/stories/group/" + this.$route.params.groupId)
@@ -47,7 +48,8 @@ export default {
   },
   data(){
     return {
-      checkedStories: []
+      checkedStories: [],
+      stories: []
     }
   },
   methods: {
@@ -62,7 +64,7 @@ export default {
         res => {
           let sprint = res.data
           console.log(sprint)
-          this.$router.push({name: "Retrospective", params: {gameId: this.$route.params.gameId,
+          this.$router.push({name: "Development", params: {gameId: this.$route.params.gameId,
           groupId: this.$route.params.groupId, sprintId: sprint.id}})
         }
       )

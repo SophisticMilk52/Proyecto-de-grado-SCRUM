@@ -23,6 +23,7 @@ import i18n from "./i18n"
 import './registerServiceWorker'
 
 import store from './plugins/store'
+// import store from './store/index'
 
 Vue.use(BlackDashboard);
 Vue.use(VueRouter);
