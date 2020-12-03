@@ -10,6 +10,5 @@ import Constant from '../constant'
 		baseURL: Constant.BASE_URL,
 		headers: {
 			'Accept': 'application/json',
-            'Access-Control-Allow-Origin': '*'
 		}
 	})
