@@ -25,9 +25,13 @@ import './registerServiceWorker'
 import store from './plugins/store'
 // import store from './store/index'
 
+
+import AxiosPlugin from 'vue-axios-cors'
+
 Vue.use(BlackDashboard);
 Vue.use(VueRouter);
 Vue.use(RouterPrefetch);
+Vue.use(AxiosPlugin);
 
 /* eslint-disable no-new */
 new Vue({
