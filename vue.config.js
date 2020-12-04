@@ -36,6 +36,6 @@ module.exports = {
     sourceMap: process.env.NODE_ENV !== 'production'
   },
   devServer: {
-  	proxy: 'https://pi2sis.icesi.edu.co/scrum/api/',
+  	proxy: 'https://pi2sis.icesi.edu.co/',
   }
 };
