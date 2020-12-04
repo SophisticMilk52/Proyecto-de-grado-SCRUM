@@ -165,7 +165,7 @@ export default {
         axios
         .post("/games/" + this.$route.params.gameId + "/groups/" + this.$route.params.groupId
         + "/participants/login/",
-        json)
+        json, {withCredentials: true})
         .then(
           (res) => {
             console.log(res.data);
