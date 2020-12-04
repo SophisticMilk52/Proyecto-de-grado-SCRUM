@@ -8,7 +8,8 @@ import Constant from '../constant'
 
 	export default axios.create({
 		baseURL: Constant.BASE_URL,
-		//headers: {
-		//	'Accept': 'application/json',
-		//}
+		headers: {
+			'Accept': 'application/json',
+          	'Access-Control-Allow-Origin': '*'
+		}
 	})
