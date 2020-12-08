@@ -94,9 +94,9 @@ export default {
     // Only thing that occurs to me for this one is find a way to place these components on an macro component, and have the inner components
     // trigger its methods whenever necessary.
     connect() {
-      let url = "http://localhost:8090/scrum/agile-websocket"
+      let url = "http://localhost:8090/scrum/api/agile-websocket"
       if(Constant.BASE_URL == "https://pi2sis.icesi.edu.co/scrum/api/"){
-        url = "https://pi2sis.icesi.edu.co/scrum/agile-websocket"
+        url = "https://pi2sis.icesi.edu.co/scrum/api/agile-websocket"
       }
       this.socket = new SockJS(url);
       this.stompClient = Stomp.over(this.socket);
