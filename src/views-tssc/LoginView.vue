@@ -3,6 +3,7 @@
     <div v-if="!isReady">Loading...</div>
     <div v-else-if="isFound && isAuthorized">
       <h2 class="text-center"><strong>Ingresar al juego</strong></h2>
+      <base-button class="btn" @click="kms">TEST</base-button>
       <br><br><br>
       <div>
         <div class="form-content login-form" v-if="!newParticipant">
@@ -118,6 +119,23 @@ export default {
         }
       );
     },
+    
+    kms(){
+      let json = {
+        stvalue: "69",
+        participantId: "302",
+        criteria: "newCriteria",
+        tasks: "newTasks"
+      }
+      
+      
+      axios
+      .post("games/70/groups/432/stories/442/estimations/",
+      json)
+      .then(
+        res => console.log("POST successful", res.data)
+      )
+    },
 
     register(event){
       console.log("Register Triggered")
@@ -165,7 +183,7 @@ export default {
         axios
         .post("/games/" + this.$route.params.gameId + "/groups/" + this.$route.params.groupId
         + "/participants/login/",
-        json)
+        json, {withCredentials: true})
         .then(
           (res) => {
             console.log(res.data);
