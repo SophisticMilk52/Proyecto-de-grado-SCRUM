@@ -18,6 +18,7 @@ import DevelopmentView from '../views-tssc/DevelopmentView';
 import RetrospectiveView from '../views-tssc/RetrospectiveView';
 import RetrospectiveDetailView from '../views-tssc/RetrospectiveDetailView';
 import UnauthView from '../views-tssc/UnauthView';
+import ReferenceView from '../views-tssc/ReferenceView';
 import store from '../plugins/store';
 
 // SHORT PATH VERSION
@@ -179,6 +180,15 @@ let router = new Router({
           path: 'games/:gameId/groups/:groupId/sprint/active/stories/:storyId',
           name: 'Retrospective Detail',
           components: { default: RetrospectiveDetailView },
+          meta: {
+            // requiresAuth: true
+          }
+        },
+        {
+          // path: 'games/:id/groups/:id2/backlog',
+          path: 'games/:gameId/groups/:groupId/references',
+          name: 'References',
+          components: { default: ReferenceView },
           meta: {
             // requiresAuth: true
           }

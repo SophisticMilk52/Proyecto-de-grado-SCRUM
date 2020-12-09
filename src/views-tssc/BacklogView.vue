@@ -20,8 +20,8 @@
       <template v-slot:description>
         <h4 class="text-center">
           Seleccione historias y estime en puntos la cantidad de esfuerzo que necesitara para
-          entregarlas completas al cliente. Además, adicione criterios de aceptación y tareas que
-          crea que falten.
+          entregarlas completas al cliente. Además, adicione criterios de aceptación que
+          crea que falten, y escriba las tareas que debe realizar para cumplir la historia.
         </h4>
       </template>
     </StoryList>

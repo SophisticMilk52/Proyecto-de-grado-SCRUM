@@ -1,6 +1,6 @@
 <template>
 <div v-if="ready==0">Loading...</div>
-<div v-else-if="ready==-1"><h1>En este momento no su grupo no ha iniciado un Sprint. Ingrese a SPRINT BACKLOG para hacer eso.</h1></div>
+<div v-else-if="ready==-1"><h1>En este momento su equipo no ha iniciado un Sprint. Ingrese a SPRINT BACKLOG para iniciar uno.</h1></div>
 <div v-else>
   <StoryList type="retrospective" :stories="stories" v-on:select="evaluate">
       <template v-slot:header>
@@ -8,8 +8,8 @@
       </template>
       <template v-slot:description>
         <h4 class="text-center">
-          Después de haber terminado este Sprint, indique para cada historia la cantidad de puntos que
-          en realidad merecía y si fue terminada.
+          Para finalizar este Sprint, indique para cada historia la cantidad de puntos que
+          en realidad merecía y la cantidad de puntos que trabajo de ella (es decir, si la pudo terminar o la hizo parcialmente).
         </h4>
       </template>
   </StoryList>

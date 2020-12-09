@@ -221,7 +221,7 @@
 
   <modal :show.sync="modals.modal0">
      <template slot="header">
-        <h2 class="modal-title" id="exampleModalLabel">{{selectedStory.shortDescription}}</h2>
+        <h2 class="modal-title" id="exampleModalLabel">{{selectedStory.shortDescription}} (Referencia: 7-{{selectedStory.stNumber}})</h2>
      </template>
      <p>
        {{selectedStory.description}}
@@ -296,6 +296,7 @@ export default {
 
   methods: {
     detailStory(s){
+      console.log(s)
       this.selectedStory = s;
       this.retrieveTasks(s.id)
       this.modals.modal0 = true

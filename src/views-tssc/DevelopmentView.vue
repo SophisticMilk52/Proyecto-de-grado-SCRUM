@@ -1,6 +1,6 @@
 <template>
 <div v-if="ready==0">Loading...</div>
-<div v-else-if="ready==-1"><h1>En este momento no su grupo no ha iniciado un Sprint. Ingrese a SPRINT BACKLOG para hacer eso.</h1></div>
+<div v-else-if="ready==-1"><h1>En este momento su equipo no ha iniciado un Sprint. Ingrese a SPRINT BACKLOG para iniciar uno.</h1></div>
 <div v-else>
   <StoryList type="develop" :stories="stories" v-on:select="showStory">
     <template v-slot:header>
@@ -8,7 +8,7 @@
     </template>
     <template v-slot:description>
       <h4 class="text-center">
-        Desarrolle las historias que decidio para este Sprint. Cuando termine una de las tareas, o
+        Desarrolle las historias del Sprint actual. Cuando termine una de las tareas, o
         complete uno de los criterios de aceptación, marquelo como terminado.
       </h4>
     </template>
