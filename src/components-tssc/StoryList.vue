@@ -18,7 +18,7 @@
   <table class="table" v-if="type=='moderator'">
     <thead>
       <tr>
-        <th class="text-center priority">Prioridad</th>
+        <th class="text-center priority">Numero de Ref.</th>
         <th class="story-title">Descripcion</th>
         <th class="text-center">Información</th>
       </tr>
@@ -26,7 +26,7 @@
      <tbody>
       <tr :key="s.id" v-for="s in stories">
         <td class="text-center">
-          {{s.priority}}
+          {{s.stNumber}}
         </td>
         <td>
           {{s.shortDescription}}
@@ -43,7 +43,7 @@
   <table class="table" v-if="type=='backlog'">
     <thead>
       <tr>
-        <th class="text-center priority">Prioridad</th>
+        <th class="text-center priority">Numero de Ref.</th>
         <th class="story-title">Descripcion</th>
         <th class="text-right points">Puntos</th>
         <th class="text-center">Información</th>
@@ -53,7 +53,7 @@
     <tbody>
       <tr :key="s.id" v-for="s in stories">
         <td class="text-center">
-          {{s.priority}}
+          {{s.stNumber}}
         </td>
         <td>
           {{s.shortDescription}}
@@ -78,7 +78,7 @@
   <table class="table" v-if="type=='develop'">
     <thead>
       <tr>
-        <th class="text-center priority">Prioridad</th>
+        <th class="text-center priority">Numero de Ref.</th>
         <th class="story-title">Descripcion</th>
         <th class="text-right points">Puntos</th>
         <th class="text-center">Información</th>
@@ -88,7 +88,7 @@
     <tbody>
       <tr :key="s.id" v-for="s in stories">
         <td class="text-center">
-          {{s.priority}}
+          {{s.stNumber}}
         </td>
         <td>
           {{s.shortDescription}}
@@ -113,7 +113,7 @@
   <table class="table" v-if="type=='sprint-backlog'">
     <thead>
       <tr>
-        <th class="text-center priority">Prioridad</th>
+        <th class="text-center priority">Numero de Ref.</th>
         <th class="story-title">Descripcion</th>
         <th class="text-right points">Puntos</th>
         <th class="text-center">Información</th>
@@ -123,7 +123,7 @@
     <tbody>
       <tr :key="s.id" v-for="s in stories">
         <td class="text-center">
-          {{s.priority}}
+          {{s.stNumber}}
         </td>
         <td>
           {{s.shortDescription}}
@@ -155,7 +155,7 @@
   <table class="table" v-if="type=='retrospective'">
     <thead>
       <tr>
-        <th class="text-center priority">Prioridad</th>
+        <th class="text-center priority">Numero de Ref.</th>
         <th class="story-title">Descripcion</th>
         <th class="text-right points">Puntos</th>
         <th class="text-right points">Estimación Ajustada</th>
@@ -167,7 +167,7 @@
     <tbody>
       <tr :key="s.id" v-for="s in stories">
         <td class="text-center">
-          {{s.priority}}
+          {{s.stNumber}}
         </td>
         <td>
           {{s.shortDescription}}

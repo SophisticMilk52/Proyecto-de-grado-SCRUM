@@ -32,7 +32,7 @@
           <td>
             <base-button @click="c.tsscState.id==1 ? finishCriteria(c.id) : resumeCriteria(c.id)"
             :type="c.tsscState.id==1 ? 'success' : 'warning'" size="sm" icon>
-              <i :class="c.tsscState.id==1 ?  'tim-icons icon-check-2' : 'tim-icons icon-simple-remove'"></i>
+              <i :class="c.tsscState.id==1 ?  'tim-icons icon-simple-remove' : 'tim-icons icon-check-2'"></i>
             </base-button>
           </td>
         </tr>
@@ -46,7 +46,7 @@
           <td>
             <base-button @click="c.tsscState.id==1 ? finishTask(c.id) : resumeTask(c.id)"
             :type="c.tsscState.id==1 ? 'success' : 'warning'" size="sm" icon>
-              <i :class="c.tsscState.id==1 ?  'tim-icons icon-check-2' : 'tim-icons icon-simple-remove'"></i>
+              <i :class="c.tsscState.id==1 ?  'tim-icons icon-simple-remove' : 'tim-icons icon-check-2'"></i>
             </base-button>
           </td>
         </tr>
