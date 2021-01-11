@@ -21,6 +21,9 @@ import UnauthView from '../views-tssc/UnauthView';
 import ReferenceView from '../views-tssc/ReferenceView';
 import store from '../plugins/store';
 
+
+import SignUpView from '../views-tssc/SignUpView'
+
 // SHORT PATH VERSION
 // import ModeratorView from '../pages-tssc/Moderator';
 // import LoginView from '../pages-tssc/Login';
@@ -273,9 +276,9 @@ let router = new Router({
           component: Games
         },
         {
-          path: 'foo/bar',
+          path: 'games/:gameId/groups/:groupId/register',
           name: 'bar',
-          components: { default: Grupo }
+          components: { default: SignUpView }
         },
         {
           path: 'est/games/:gameId/stories/:storyId',
@@ -308,9 +311,11 @@ let router = new Router({
 
 router.beforeEach((to, from, next) => {
   if(to.matched.some(record => record.meta.requiresAuth)){
-    if(store.getters.isLoggedIn){
-      next()
-      return
+    if(localStorage.getItem("userId") != undefined && localStorage.getItem('userId') != null){
+      if(store.getters.isLoggedIn){
+        next()
+        return
+      }
     }
     next("/unauth")
   } else {

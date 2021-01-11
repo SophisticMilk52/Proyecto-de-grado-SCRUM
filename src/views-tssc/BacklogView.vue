@@ -1,19 +1,6 @@
 <template>
   <div class>
-    <!-- <h1 class="text-center"><strong>Historias</strong></h1>
-    <div class="elementos">
-      <table class="table">
-        <tr :key="story.id" v-for="story in stories">
-          <td>
-              <h3 class="h3-historias" @click="selectStory(story)">{{story.shortDescription}}</h3>
-              <p><i><strong>{{story.description}}</strong></i></p>
-          </td>
-          <td>
-          </td>
-        </tr>
-      </table>
-    </div> -->
-    <StoryList type="backlog" :stories="stories" v-on:select="selectStory">
+    <StoryList :key="storyListKey" type="backlog" :stories="stories" v-on:select="selectStory" v-on:refresh="refresh">
       <template v-slot:header>
         <h1 class="text-center"><strong>Backlog</strong></h1>
       </template>
@@ -25,18 +12,6 @@
         </h4>
       </template>
     </StoryList>
-    <!-- <StoryList type="estimation" :gameId="this.$route.params.gameId"
-    :groupId="this.$route.params.groupId" v-on:select="selectStory">
-      <template v-slot:header>
-        <h1 class="text-center"><strong>Backlog</strong></h1>
-      </template>
-      <template v-slot:description>
-        <h4 class="text-center">
-          Seleccione historias y estime en puntos la cantidad de esfuerzo que necesitara para
-          entregarlas completas al cliente.
-        </h4>
-      </template>
-    </StoryList> -->
   </div>
 </template>
 
@@ -53,9 +28,8 @@ export default {
   },
   data() {
     return {
-      idJuego: this.$route.params.gameId,
-      idHistoria: this.$route.params.groupId,
       stories: [],
+      storyListKey: 0,
 
       received_messages: [],
       send_message: "Alvaro1",
@@ -63,17 +37,41 @@ export default {
     };
   },
   methods: {
-    selectStory(story) {
-      const payload = {
-        storyTitle: story.shortDescription,
-        storyId: story.id,
-        groupId: this.$store.state.currentUser.tsscGroup.id
-      }
-      if (this.stompClient && this.stompClient.connected) {
-        if(confirm("¿Esta seguro que quiere que su equipo empiece a estimar esta historia?")){
-          this.stompClient.send("/app/selectStory", JSON.stringify(payload), {});
+    refresh(){
+      axios
+      .get("/games/" + this.$route.params.gameId + "/stories/group/" + this.$route.params.groupId)
+      .then(res => this.stories = res.data.sort(
+        (a,b) => {
+          if(a.stNumber > b.stNumber) return 1
+          if(a.stNumber < b.stNumber) return -1
+          return 0
         }
-      }
+      ))
+      this.storyListKey = this.storyListKey + 1
+    },
+
+    selectStory(story) {
+      // const payload = {
+      //   storyTitle: story.shortDescription,
+      //   storyId: story.id,
+      //   groupId: this.$store.state.currentUser.tsscGroup.id
+      // }
+      // if (this.stompClient && this.stompClient.connected) {
+      //   if(confirm("¿Esta seguro que quiere que su equipo empiece a estimar esta historia?")){
+      //     this.stompClient.send("/app/selectStory", JSON.stringify(payload), {});
+      //   }
+      // }
+      this.$router.push(
+        {
+          name: 'Estimation',
+          params: {
+            gameId: this.$route.params.gameId,
+            groupId: this.$route.params.groupId,
+            storyId: story.id
+          }
+        }
+      );
+
     },
 
     notifyBeforeRedirect(storyTitle) {
@@ -154,13 +152,19 @@ export default {
     // });
     axios
     .get("/games/" + this.$route.params.gameId + "/stories/group/" + this.$route.params.groupId)
-    .then(res => this.stories = res.data)
+    .then(res => this.stories = res.data.sort(
+      (a,b) => {
+        if(a.stNumber > b.stNumber) return 1
+        if(a.stNumber < b.stNumber) return -1
+        return 0
+      }
+    ))
 
-    this.connect();
-    console.log("Apparently I am now connected!");
+    // this.connect();
+    // console.log("Apparently I am now connected!");
   },
   beforeDestroy() {
-    this.disconnect();
+    // this.disconnect();
   },
 };
 </script>

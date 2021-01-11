@@ -37,6 +37,7 @@ Vue.use(AxiosPlugin);
 new Vue({
   router,
   store,
+  beforeCreate() { this.$store.commit('initializeStore')},
   i18n,
   render: h => h(App)
 }).$mount("#app");

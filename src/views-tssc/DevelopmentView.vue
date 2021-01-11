@@ -26,13 +26,18 @@
      <div class="container">
       <h4>Criterios de aceptación</h4>
       <table>
-        <tr :key="c.id" v-for="c in criteria">
-          <td class="description" v-if="c.tsscState.id==1">{{c.description}}</td>
-          <td class="description" v-else><s>{{c.description}}</s></td>
+        <tr :key="`${modalKey}-${c.id}`" v-for="(c, index) in criteria">
+          <td :class="criteria_bool[index] ? 'description':'description done'">
+            {{c.description}}
+          </td>
           <td>
-            <base-button @click="c.tsscState.id==1 ? finishCriteria(c.id) : resumeCriteria(c.id)"
+            <!-- <base-button @click="c.tsscState.id==1 ? finishCriteria(c.id,index) : resumeCriteria(c.id,index)"
             :type="c.tsscState.id==1 ? 'success' : 'warning'" size="sm" icon>
               <i :class="c.tsscState.id==1 ?  'tim-icons icon-simple-remove' : 'tim-icons icon-check-2'"></i>
+            </base-button> -->
+            <base-button @click="c.tsscState.id==1 ? finishCriteria(c.id,index) : resumeCriteria(c.id,index)"
+            :type="criteria_bool[index] ? 'success' : 'warning'" size="sm" icon>
+              <i :class="criteria_bool[index] ?  'tim-icons icon-simple-remove' : 'tim-icons icon-check-2'"></i>
             </base-button>
           </td>
         </tr>
@@ -40,13 +45,12 @@
 
       <h4>Tareas</h4>
       <table>
-        <tr :key="c.id" v-for="c in tasks">
-          <td class="description" v-if="c.tsscState.id==1">{{c.description}}</td>
-          <td class="description" v-else><s>{{c.description}}</s></td>
+        <tr :key="c.id" v-for="(c,index) in tasks">
+          <td :class="tasks_bool[index] ? 'description':'description done'">{{c.description}}</td>
           <td>
-            <base-button @click="c.tsscState.id==1 ? finishTask(c.id) : resumeTask(c.id)"
-            :type="c.tsscState.id==1 ? 'success' : 'warning'" size="sm" icon>
-              <i :class="c.tsscState.id==1 ?  'tim-icons icon-simple-remove' : 'tim-icons icon-check-2'"></i>
+            <base-button @click="c.tsscState.id==1 ? finishTask(c.id,index) : resumeTask(c.id,index)"
+            :type="tasks_bool[index] ? 'success' : 'warning'" size="sm" icon>
+              <i :class="tasks_bool[index] ?  'tim-icons icon-simple-remove' : 'tim-icons icon-check-2'"></i>
             </base-button>
           </td>
         </tr>
@@ -72,15 +76,25 @@ export default {
    */
   data(){
     return {
+      modalKey: 0,
       ready: 0,
       selectedStory: {
         description: "",
         shortDescription: "",
         criteria: [],
       },
+      // List of stories
+      stories: [],
+
+      // Criteria and Tasks of a selected story
       criteria: [],
       tasks: [],
-      stories: [],
+
+      // Bool arrays for the above
+      criteria_bool: [],
+      tasks_bool: [],
+
+      // Shows modal
       modals: {
         modal1: false
       }
@@ -120,25 +134,42 @@ export default {
   methods: {
     showStory(story){
       this.selectedStory = story
+      this.tasks_bool.splice(0)
+      this.criteria_bool.splice(0)
       axios
       .get("/games/" + this.$route.params.gameId + "/stories/" + story.id + "/tasks/")
       .then(
         (res) => {
-          console.log("answer in")
           this.tasks = res.data
+          this.tasks.forEach( t => {
+            this.tasks_bool.push(t.tsscState.id==1?true:false)
+          })
         }
       )
-      axios
-      .get("/games/" + this.$route.params.gameId + "/stories/" + story.id + "/accriteria/")
       .then(
-        (res2) => {
-          this.criteria = res2.data
-        }
+        axios
+        .get("/games/" + this.$route.params.gameId + "/stories/" + story.id + "/accriteria/")
+        .then(
+          (res2) => {
+            this.criteria = res2.data
+            this.criteria.forEach( t => {
+              this.criteria_bool.push(t.tsscState.id==1?true:false)
+            })
+          }
+        )
+        .then(
+          () => {
+            this.modals.modal1 = true
+            console.log("crit",this.criteria_bool)
+            console.log("task",this.tasks_bool)
+          }
+        )
       )
-      this.modals.modal1 = true;
     },
 
-    finishCriteria(id){
+
+
+    finishCriteria(id,index){
       let json = { state: "INACTIVE" }
       axios
       .put("/games/" + this.$route.params.gameId + "/stories/" + this.selectedStory.id
@@ -150,17 +181,19 @@ export default {
         + "/accriteria/")
         .then(
           res => {
-            this.criteria = []
+            this.criteria.splice(0)
             this.criteria = res.data
-            this.$forceUpdate()
             this.$notify({type: "success",
             message: "¡Se ha aceptado el criterio de aceptación!"})
+            this.modalKey = this.modalKey + 1
+            this.criteria_bool.splice(index,1,false)
+            this.$nextTick(() => {})
           }
         )
       )
     },
 
-    finishTask(id){
+    finishTask(id,index){
       let json = { state: "INACTIVE" }
       axios
       .put("/games/" + this.$route.params.gameId + "/stories/" + this.selectedStory.id
@@ -172,11 +205,13 @@ export default {
         + "/tasks/")
         .then(
           res => {
-            this.tasks = []
+            this.tasks.splice(0)
             this.tasks = res.data
-            this.$forceUpdate()
             this.$notify({type: "success",
             message: "¡Se ha completado la tarea!"})
+            this.modalKey = this.modalKey + 1
+            this.tasks_bool.splice(index,1,false)
+            this.$nextTick(() => {})
           }
         )
       )
@@ -184,7 +219,7 @@ export default {
 
     },
 
-    resumeCriteria(id){
+    resumeCriteria(id,index){
       let json = { state: "ACTIVE" }
       axios
       .put("/games/" + this.$route.params.gameId + "/stories/" + this.selectedStory.id
@@ -196,19 +231,20 @@ export default {
         + "/accriteria/")
         .then(
           res => {
-            this.criteria = []
+            this.criteria.splice(0)
             this.criteria = res.data
-            console.log("reloaded criteria")
-            this.$forceUpdate()
             this.$notify({type: "success",
             message: "El criterio de aceptación sigue sin aceptar."})
+            this.modalKey = this.modalKey + 1
+            this.criteria_bool.splice(index,1,true)
+            this.$nextTick(() => {})
           }
         )
       )
 
     },
 
-    resumeTask(id){
+    resumeTask(id,index){
       let json = { state: "ACTIVE" }
       axios
       .put("/games/" + this.$route.params.gameId + "/stories/" + this.selectedStory.id
@@ -220,11 +256,13 @@ export default {
         + "/tasks/")
         .then(
           res => {
-            this.tasks = []
+            this.tasks.splice(0)
             this.tasks = res.data
-            this.$forceUpdate()
             this.$notify({type: "success",
             message: "La tarea sigue incompleta"})
+            this.modalKey = this.modalKey + 1
+            this.tasks_bool.splice(index,1,true)
+            this.$nextTick(() => {})
           }
         )
       )
@@ -239,6 +277,10 @@ export default {
 <style scoped>
 td.description{
   width: 90%
+}
+
+td.done {
+  text-decoration: line-through;
 }
 
 </style>

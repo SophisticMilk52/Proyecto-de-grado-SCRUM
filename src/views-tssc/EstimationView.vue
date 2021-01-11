@@ -93,7 +93,7 @@ export default {
       }
 
       let route = "/games/" + this.$route.params.gameId + "/groups/"
-        + this.$store.state.currentUser.tsscGroup.id + "/stories/"
+        + this.$store.state.currentUser.tsscGroup + "/stories/"
         + this.$route.params.storyId + "/estimations/";
 
       axios.post(route, json).then(
@@ -158,7 +158,7 @@ export default {
         "/games/" +
         this.$route.params.gameId +
         "/groups/" +
-        this.$store.state.currentUser.tsscGroup.id +
+        this.$store.state.currentUser.tsscGroup +
         "/stories/" +
         this.$route.params.storyId +
         "/estimations/";

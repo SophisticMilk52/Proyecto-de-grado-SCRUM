@@ -1,6 +1,6 @@
 <template>
 <div>
-  <StoryList type="sprint-backlog" :stories="stories" v-on:submit="startSprint">
+  <StoryList type="sprint-backlog" :stories="stories" v-on:submit="startSprint" :activeSprint="activeSprint">
     <template v-slot:header>
       <h1 class="text-center"><strong>Sprint Backlog</strong></h1>
     </template>
@@ -45,30 +45,64 @@ export default {
     axios
     .get("/games/" + this.$route.params.gameId + "/stories/group/" + this.$route.params.groupId)
     .then(res => this.stories = res.data)
+
+    axios
+    .get("/games/" + this.$route.params.gameId + "/sprints/group/" + this.$route.params.groupId
+    + "/active/")
+    .then(res => res.data ? this.activeSprint = true : this.activeSprint = false)
   },
   data(){
     return {
       checkedStories: [],
-      stories: []
+      stories: [],
+      activeSprint: false
     }
   },
   methods: {
     startSprint(stories){
-      let json = {
-        tsscStoriesIds: stories
-      }
-      axios
-      .put("/games/" + this.$route.params.gameId + "/stories/group/" + this.$route.params.groupId
-      + "/sprint/", json)
-      .then(
-        res => {
-          let sprint = res.data
-          console.log(sprint)
-          this.$router.push({name: "Development", params: {gameId: this.$route.params.gameId,
-          groupId: this.$route.params.groupId, sprintId: sprint.id}})
+      if(stories.length==0){
+        this.$notify({type: "warning",
+            message: "No puede iniciar un Sprint si no le asigna historias para desarrollar"})
+      } else {
+        let json = {
+          tsscStoriesIds: stories
         }
-      )
+        axios
+        .put("/games/" + this.$route.params.gameId + "/stories/group/" + this.$route.params.groupId
+        + "/sprint/", json)
+        .then(
+          res => {
+            let sprint = res.data
+            console.log(sprint)
+            this.$router.push({name: "Development", params: {gameId: this.$route.params.gameId,
+            groupId: this.$route.params.groupId, sprintId: sprint.id}})
+          }
+        )
+      }
+    },
 
+
+    // Develop backend method to receive more stories
+    addToSprint(stories){
+      if(stories.length==0){
+        this.$notify({type: "warning",
+            message: "Seleccione historias para agregar al Sprint"})
+      } else {
+        let json = {
+          tsscStoriesIds: stories
+        }
+        axios
+        .put("/games/" + this.$route.params.gameId + "/stories/group/" + this.$route.params.groupId
+        + "/sprint/", json)
+        .then(
+          res => {
+            let sprint = res.data
+            console.log(sprint)
+            this.$router.push({name: "Development", params: {gameId: this.$route.params.gameId,
+            groupId: this.$route.params.groupId, sprintId: sprint.id}})
+          }
+        )
+      }
     }
   }
 }

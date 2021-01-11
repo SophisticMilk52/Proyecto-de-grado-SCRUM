@@ -7,16 +7,10 @@
       <div>
         <div class="form-content login-form" v-if="!newParticipant">
           <form @submit.prevent>
-            <base-input
-            label="Correo"
-            type="text"
-            v-model="email"
-            />
-            <base-input
-            label="Contraseña"
-            type="password"
-            v-model="password"
-            />
+            <label>Correo Electronico</label>
+            <base-input type="text" v-model="email" addon-left-icon="tim-icons icon-email-85"/>
+            <label>Contraseña</label>
+            <base-input type="password" v-model="password" addon-left-icon="tim-icons icon-key-25"/>
             <p class="text-right">¿Olvido su contraseña? Haga clic aqui.</p>
             <base-button type="secondary" class="btn btn-lg accept-btn" @click="login"
             >Iniciar sesión</base-button>
@@ -28,19 +22,12 @@
         </div>
         <div class="form-content login-form" v-else>
           <form @submit.prevent>
-            <base-input
-            label="Nombre"
-            type="text"
-            placeholder="Nombre con el cual sera reconocido por su grupo dentro del juego"
-            v-model="name"
-            />
-            <base-input
-            label="Correo"
-            type="text"
-            placeholder="Correo al que se le va a enviar su contraseña y el enlace para volver
-            a esta pagina."
-            v-model="email"
-            />
+            <label>Nombre</label>
+            <base-input type="text" v-model="name" addon-left-icon="tim-icons icon-single-02"
+            placeholder="Nombre con el cual sera reconocido por su grupo dentro del juego" />
+            <label>Correo Electronico</label>
+            <base-input type="text" v-model="email" addon-left-icon="tim-icons icon-email-85"
+            placeholder="Correo al que se le va a enviar su contraseña y el enlace para volver a esta pagina."/>
             <base-button type="secondary" class="btn btn-lg accept-btn" @click="register"
             >Registrar</base-button>
             <br><br>
@@ -87,12 +74,6 @@ export default {
     };
   },
   created() {
-    // I should make a GET request that has variable results depending on the password.
-    // If correct, show login form select. If incorrect, point out why. This should be via back I think?
-    // Causes of Error:
-    // • Wrong password
-    // • Game is not active
-    console.log("I EXIST")
     this.retrieveData();
   },
   methods: {

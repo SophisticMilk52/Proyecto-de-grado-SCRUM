@@ -37,11 +37,11 @@ export default {
 
     console.log(this.participants)
     let estimationRoute = "/games/" + this.$route.params.gameId + "/groups/"
-      + this.$store.state.currentUser.tsscGroup.id + "/stories/" + this.$route.params.storyId
+      + this.$store.state.currentUser.tsscGroup + "/stories/" + this.$route.params.storyId
       + "/estimations/";
 
     let participantRoute = "/games/" + this.$route.params.gameId + "/groups/"
-      + this.$store.state.currentUser.tsscGroup.id + "/participants/";
+      + this.$store.state.currentUser.tsscGroup + "/participants/";
 
     axios.get(estimationRoute)
     .then((res) => {
@@ -86,7 +86,7 @@ export default {
       console.log(this.participants)
       this.estimations = null
       let estimationRoute = "/games/" + this.$route.params.gameId + "/groups/"
-      + this.$store.state.currentUser.tsscGroup.id + "/stories/" + this.$route.params.storyId
+      + this.$store.state.currentUser.tsscGroup + "/stories/" + this.$route.params.storyId
       + "/estimations/";
       axios.get(estimationRoute).then(
         (res) => {
@@ -112,11 +112,11 @@ export default {
       // console.log(json)
 
       let route = "/games/" + this.$route.params.gameId + "/stories/" + this.$route.params.storyId
-      + "/group/" + this.$store.state.currentUser.tsscGroup.id
+      + "/group/" + this.$store.state.currentUser.tsscGroup
 
       axios.put(route, json).then(
         this.$router.push({name: 'Backlog', params: {gameId: this.$route.params.gameId,
-            groupId: this.$store.state.currentUser.tsscGroup.id }})
+            groupId: this.$store.state.currentUser.tsscGroup }})
       )
 
     },
@@ -128,7 +128,7 @@ export default {
         name: "Reestimation",
         params: {
           gameId: this.$route.params.gameId,
-          groupId: this.$store.state.currentUser.tsscGroup.id,
+          groupId: this.$store.state.currentUser.tsscGroup,
           storyId: this.$route.params.storyId,
           estimationId: estimationId
         }

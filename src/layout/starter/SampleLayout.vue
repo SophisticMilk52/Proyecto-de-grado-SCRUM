@@ -10,7 +10,6 @@
         <sidebar-link v-if="$store.getters.isLoggedIn" :to="{ name: 'Retrospective' }" :name="$t('Retrospectiva')" icon="tim-icons icon-check-2" />
         <sidebar-link v-if="$store.getters.isLoggedIn" :to="{ name: 'References' }" :name="$t('Material de Referencia')" icon="tim-icons icon-world" />
         <!-- <sidebar-link :to="{ name: 'Retrospective' }" :name="$t('Manual de Uso')" icon="tim-icons icon-single-02" /> -->
-        <sidebar-link :to="{ name: 'Retrospective' }" :name="$t('Manual de Uso')" icon="tim-icons icon-single-02" />
         <!-- <sidebar-link to="/games" :name="$t('Estimacion')" icon="tim-icons icon-minimal-right" /> -->
         <!-- <sidebar-link to="/proceso" :name="$t('Sprint Backlog')" icon="tim-icons icon-minimal-right" /> -->
 

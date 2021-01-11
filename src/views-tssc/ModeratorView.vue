@@ -78,6 +78,7 @@ export default {
       axios.get("/games/" + this.$route.params.gameId + "/moderator/" + this.$route.params.modPwd)
       .then(
         res => {
+          console.log(res.data)
           this.isAuthorized = true;
           this.gameData = res.data;
           this.isReady = true;
